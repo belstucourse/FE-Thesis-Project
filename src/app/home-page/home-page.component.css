@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 18pt;
+}
+.topnav {
+  background-color: #fff;
+  overflow: hidden;
+}
+.topnav a {
+  float: right;
+  color: #000000;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+.topnav a:hover {
+  color: rgb(173, 173, 173);
+}
+.registration {
+  display: flex;
+  background-color: rgba(206, 206, 206, 0.507);
+}
+.registration h1 {
+  padding-top: 80px;
+  padding-right: 30px;
+  padding-left: 20px;
+}
+.registration button {
+  border: none;
+  border-radius: 10px;
+  font-size: 18pt;
+  margin-left: 20px;
+  margin-top: 20px;
+  background-color: #4fb4b8;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+}
+img {
+  height: 100%;
+}
+.general_info img {
+  height: 100%;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  padding-top: 20px;
+}
+
