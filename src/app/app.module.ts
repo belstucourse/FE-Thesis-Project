@@ -4,18 +4,18 @@ import { BrowserModule } from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { HomePageComponent } from './home-page/home-page.component';
-import { CatalogPageComponent } from './catalog-page/catalog-page.component';
-import { PsychoCardComponent } from './psycho-card/psycho-card.component';
-import { SignInComponent } from './sign-in/sign-in.component';
-import { RegistrationClientPageComponent } from './registration-client-page/registration-client-page.component';
-import { RegistrationPsychoPageComponent } from './registration-psycho-page/registration-psycho-page.component';
-import { AppointmentPageComponent } from './appointment-page/appointment-page.component';
-import { ComplaitPageComponent } from './complait-page/complait-page.component';
-import { FeedbackPageComponent } from './feedback-page/feedback-page.component';
-import { CreatePostPageComponent } from './create-post-page/create-post-page.component';
-import { BlogPageComponent } from './blog-page/blog-page.component';
-import { BlogCardComponent } from './blog-card/blog-card.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
+import { CatalogPageComponent } from './components/catalog-page/catalog-page.component';
+import { PsychoCardComponent } from './components/psycho-card/psycho-card.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
+import { RegistrationClientPageComponent } from './components/registration-client-page/registration-client-page.component';
+import { RegistrationPsychoPageComponent } from './components/registration-psycho-page/registration-psycho-page.component';
+import { AppointmentPageComponent } from './components/appointment-page/appointment-page.component';
+import { ComplaitPageComponent } from './components/complait-page/complait-page.component';
+import { FeedbackPageComponent } from './components/feedback-page/feedback-page.component';
+import { CreatePostPageComponent } from './components/create-post-page/create-post-page.component';
+import { BlogPageComponent } from './components/blog-page/blog-page.component';
+import { BlogCardComponent } from './components/blog-card/blog-card.component';
 
 const routes = [
   {path: '', component: HomePageComponent},
