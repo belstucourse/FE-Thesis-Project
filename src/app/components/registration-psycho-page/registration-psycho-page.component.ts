@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-registration-psycho-page',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./registration-psycho-page.component.css']
 })
 export class RegistrationPsychoPageComponent implements OnInit {
+  public files;
+  authForm: FormGroup;
+  acceptedFormats: String[];
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onSubmit() {
+
+  }
 }

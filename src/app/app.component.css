@@ -12,3 +12,7 @@
 .topnav a:hover {
   color: rgb(173, 173, 173);
 }
+.expanded-toolbar {
+  justify-content: space-between;
+  align-items: center;
+}

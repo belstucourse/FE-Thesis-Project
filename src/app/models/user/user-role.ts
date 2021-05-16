@@ -1,0 +1,6 @@
+export interface UserRole {
+  ROLE_ADMIN,
+  ROLE_CLIENT,
+  ROLE_SUPPORT,
+  ROLE_PSYCHOLOGIST
+}

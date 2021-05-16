@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-sign-in',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
-
+  public authForm: FormGroup;
   constructor() { }
 
   ngOnInit(): void {
   }
+  public authUser()
+  {
+  }
 
+  onSubmit() {
+
+  }
 }
