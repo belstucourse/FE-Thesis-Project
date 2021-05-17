@@ -1,0 +1,7 @@
+export enum FileType {
+  AVATAR,
+  POST,
+  CERTIFICATE,
+  APPOINTMENT,
+  PRESCRIPTIONS
+}
