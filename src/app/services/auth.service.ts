@@ -5,12 +5,14 @@ import {HttpClient} from '@angular/common/http';
 import {UserService} from './user.service';
 import {Router} from '@angular/router';
 import {UserLogin} from '../models/user/user-login';
-import {JwtHelperService} from "@auth0/angular-jwt";
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private helper = new JwtHelperService();
+
   constructor(private http: HttpClient,
               private userService: UserService,
               private router: Router) {
@@ -24,25 +26,14 @@ export class AuthService {
     let user: UserLogin = {
       login: username,
       password: password
-    }
+    };
     return this.http.post<any>('api/token', user).subscribe(
       (token: any) => {
-        const helper = new JwtHelperService();
-        const decodedToken = helper.decodeToken(token.token);
+        const decodedToken = this.helper.decodeToken(token.token);
         localStorage.setItem('token', token.token);
-        let user: UserModel = {
-          id: decodedToken.id,
-          name: decodedToken.name,
-          surname: decodedToken.surname,
-          aboutMe: decodedToken.aboutMe,
-          login: decodedToken.sub,
-          password: null,
-          role: decodedToken.scopes,
-          status: decodedToken.status,
-          photoUrl: decodedToken.photoUrl,
-          email: decodedToken.email,
-        }
-        this.userService.activeUser.next(user);
+        this.userService.getUserById(decodedToken.id)
+          .subscribe((user: User) => this.userService.activeUser.next(user));
+
         this.router.navigate(['/story']);
       });
   }
@@ -56,6 +47,6 @@ export class AuthService {
 
   public isAuthenticated(): boolean {
     const token = this.getToken();
-    return tokenNotExpired(null, token);
+    return this.helper.isTokenExpired(token);
   }
 }

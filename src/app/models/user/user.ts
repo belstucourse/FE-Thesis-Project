@@ -2,6 +2,7 @@ import {UserRole} from './user-role';
 
 export interface User {
   id?: string;
+  email: string;
   firstName: string;
   middleName: string;
   lastName: string
@@ -12,4 +13,5 @@ export interface User {
   password?: string;
   roles?: Array<UserRole>;
   avatarUrl?: string;
+  type?: string;
 }

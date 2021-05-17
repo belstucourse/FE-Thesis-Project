@@ -5,6 +5,9 @@ import {Client} from '../../models/user/client';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MaxSizeValidator} from '@angular-material-components/file-input';
+import {FileUploaderService} from '../../services/file-uploader.service';
+import {User} from '../../models/user/user';
+import {FileType} from '../../models/file-type.enum';
 
 @Component({
   selector: 'app-registration-client-page',
@@ -17,10 +20,12 @@ export class RegistrationClientPageComponent implements OnInit {
 
   public files;
   maxSize = 16;
+  acceptedFormats: any;
 
   constructor(private userService: UserService,
               private router: Router,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              private fileUploaderService: FileUploaderService) {
     this.fileControl = new FormControl(this.files, [
       Validators.required,
       MaxSizeValidator(this.maxSize * 1024)
@@ -37,23 +42,23 @@ export class RegistrationClientPageComponent implements OnInit {
       date: new FormControl('', [Validators.required])
     });
     this.fileControl.valueChanges.subscribe((files: any) => {
-      if (!Array.isArray(files)) {
-        this.files = [files];
-      } else {
-        this.files = files;
-      }
+      this.files = files;
     });
   }
 
   onSubmit() {
     let client: Client = {
+      email: this.authForm.controls['email'].value,
       firstName: this.authForm.controls['firstName'].value,
       middleName: this.authForm.controls['middleName'].value,
       lastName: this.authForm.controls['lastName'].value,
-      password: this.authForm.controls['email'].value,
-      birthdayDate: this.authForm.controls['date'].value
+      password: this.authForm.controls['password'].value,
+      birthdayDate: this.authForm.controls['date'].value,
+      type: 'client'
     };
-    this.userService.saveUser(client).subscribe(() => this.router.navigate(['/signin']),
-      error => this.snackBar.open(error, 'Done'));
+    this.userService.saveUser(client).subscribe((client: User) => {
+      this.fileUploaderService.saveFile(this.files, client.id, FileType.AVATAR).subscribe();
+      this.router.navigate(['/']);
+    }, error => this.snackBar.open(error.message, 'Done'));
   }
 }

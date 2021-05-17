@@ -3,7 +3,7 @@
   <mat-card>
     <mat-card-content>
       <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
-        <div class="h4 text-center mt-3">Вход</div>
+        <div class="h4 text-center mt-3">Регистрация</div>
 
         <mat-form-field appearance="standard" style="width: 100%">
           <mat-label>Электронная почта</mat-label>
@@ -43,10 +43,9 @@
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
         <mat-form-field appearance="fill" style="width: 100%">
-          <mat-label>Фотография</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="avatar">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+          <ngx-mat-file-input [formControl]="fileControl" [accept]="acceptedFormats">
+            <mat-hint>Выберите файл</mat-hint>
+          </ngx-mat-file-input>
         </mat-form-field>
         <button mat-raised-button color="primary">Зарегистрироваться</button>
       </form>
