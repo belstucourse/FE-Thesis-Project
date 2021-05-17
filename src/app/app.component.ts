@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'fe-thesis-project';
+  title = 'Shrink';
+  isAuthenticated = false;
+
+  async logout(): Promise<void> {
+    // todo
+  }
 }

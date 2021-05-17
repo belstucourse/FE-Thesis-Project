@@ -1,11 +1,39 @@
-<div>
-  <div class="topnav">
-    <a routerLink="/signin">Вход</a>
-    <a href="#news">О нас</a>
-    <a routerLink="/catalog">Специалисты</a>
-    <a href="#costs">Цены</a>
-    <a routerLink="/blog">Блог</a>
-    <a href="#home" style="float: left;">SHRINK</a>
+<mat-toolbar color="primary" class="expanded-toolbar">
+  <span>
+    <button mat-button routerLink="/">{{title}}</button>
+  </span>
+  <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+    <button routerLink="/blog" mat-button routerLink="/posts">
+      <mat-icon>article</mat-icon>
+      Блог
+    </button>
+    <button mat-button routerLink="/news" *ngIf="!isAuthenticated">
+      <mat-icon>lightbulb</mat-icon>
+      О нас
+    </button>
+    <button mat-button routerLink="/catalog" *ngIf="!isAuthenticated">
+      <mat-icon>medication</mat-icon>
+      Специалисты
+    </button>
+
+    <button mat-button routerLink="/costs" *ngIf="!isAuthenticated">
+      <mat-icon>payments</mat-icon>
+      Цены
+    </button>
+
+
+
+    <button mat-button routerLink="/signin" *ngIf="!isAuthenticated">
+      <mat-icon>how_to_reg</mat-icon>
+      Вход
+    </button>
+    <button mat-button *ngIf="isAuthenticated" (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>
+      Выход
+    </button>
   </div>
+</mat-toolbar>
+
+<div class="container">
   <router-outlet></router-outlet>
 </div>
