@@ -68,6 +68,7 @@ import {ChatHeaderComponent} from './components/chat/chat-header/chat-header.com
 import {ChatControlsComponent} from './components/chat/chat-controls/chat-controls.component';
 import {ChatMessageComponent} from './components/chat/chat-message/chat-message.component';
 import {FlexModule} from '@angular/flex-layout';
+import {HttpClientModule} from '@angular/common/http';
 
 const routes = [
   {path: '', component: HomePageComponent},
@@ -154,7 +155,8 @@ const routes = [
     MatTreeModule,
     OverlayModule,
     NgxMatFileInputModule,
-    FlexModule
+    FlexModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

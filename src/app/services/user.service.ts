@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, ReplaySubject, Subject} from 'rxjs';
 import {User} from '../models/user/user';
 import {HttpClient} from '@angular/common/http';
 import {Client} from '../models/user/client';
@@ -9,6 +9,7 @@ import {Psychologist} from '../models/user/psychologist';
   providedIn: 'root'
 })
 export class UserService {
+  public activeUser: Subject<User> = new ReplaySubject(1);
 
   constructor(private httpClient: HttpClient) {
   }
@@ -17,19 +18,8 @@ export class UserService {
     return this.httpClient.get<User>('api/users/' + userId);
   }
 
-  public saveUser(user: User, file: File): Observable<User> {
-    const formData: FormData = new FormData();
-    formData.append('file', file);
-    formData.append('firstName', user.firstName);
-    formData.append('middleName', user.middleName);
-    formData.append('lastName', user.lastName);
-    formData.append('password', user.password);
-    if (this.isClient(user)) {
-      formData.append('birthdayDate', user.birthdayDate.toLocaleDateString());
-    } else if (this.isPsychologist(user)) {
-      formData.append('mobile', user.mobile);
-      formData.append('tags', JSON.stringify(user.tags));
-    }
+  //type: client, support, psychologist, admin
+  public saveUser(user: User): Observable<User> {
     return this.httpClient.post<User>('/api/users', user);
   }
 
