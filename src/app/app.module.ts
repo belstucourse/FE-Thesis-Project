@@ -69,6 +69,7 @@ import {ChatControlsComponent} from './components/chat/chat-controls/chat-contro
 import {ChatMessageComponent} from './components/chat/chat-message/chat-message.component';
 import {FlexModule} from '@angular/flex-layout';
 import {HttpClientModule} from '@angular/common/http';
+import { OrderComponent } from './components/order/order.component';
 
 const routes = [
   {path: '', component: HomePageComponent},
@@ -76,12 +77,13 @@ const routes = [
   {path: 'signin', component: SignInComponent},
   {path: 'registration-c', component: RegistrationClientPageComponent},
   {path: 'registration-p', component: RegistrationPsychoPageComponent},
-  {path: 'appointment', component: AppointmentPageComponent},
+  {path: 'appointment/:psychoId', component: AppointmentPageComponent},
   {path: 'complaint', component: ComplaitPageComponent},
   {path: 'feedback', component: FeedbackPageComponent},
   {path: 'create-post', component: CreatePostPageComponent},
   {path: 'blog', component: BlogPageComponent},
-  {path: 'chat', component: ChatComponent}
+  {path: 'chat', component: ChatComponent},
+  {path: 'order', component: OrderComponent}
 ];
 
 @NgModule({
@@ -103,6 +105,7 @@ const routes = [
     ChatHeaderComponent,
     ChatControlsComponent,
     ChatMessageComponent,
+    OrderComponent,
   ],
   imports: [
     BrowserModule,

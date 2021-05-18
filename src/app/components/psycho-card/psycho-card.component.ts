@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Psychologist} from '../../models/user/psychologist';
 
 @Component({
   selector: 'app-psycho-card',
@@ -6,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./psycho-card.component.css']
 })
 export class PsychoCardComponent implements OnInit {
+  @Input()
+  public psychologist: Psychologist;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

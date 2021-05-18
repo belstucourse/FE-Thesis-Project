@@ -1,9 +1,9 @@
 export interface Event {
-  id: string;
+  id?: string;
   psychologistId: string;
   clientId: string;
   date: Date;
-  isEnded: boolean;
-  isConfirmed: boolean;
+  isEnded?: boolean;
+  isConfirmed?: boolean;
   reasonForVisit: string;
 }
