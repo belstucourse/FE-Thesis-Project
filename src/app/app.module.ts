@@ -70,6 +70,7 @@ import {ChatMessageComponent} from './components/chat/chat-message/chat-message.
 import {FlexModule} from '@angular/flex-layout';
 import {HttpClientModule} from '@angular/common/http';
 import { OrderComponent } from './components/order/order.component';
+import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 
 const routes = [
   {path: '', component: HomePageComponent},
@@ -83,7 +84,8 @@ const routes = [
   {path: 'create-post', component: CreatePostPageComponent},
   {path: 'blog', component: BlogPageComponent},
   {path: 'chat', component: ChatComponent},
-  {path: 'order', component: OrderComponent}
+  {path: 'order', component: OrderComponent},
+  {path: 'profile', component: ProfilePageComponent}
 ];
 
 @NgModule({
@@ -106,6 +108,7 @@ const routes = [
     ChatControlsComponent,
     ChatMessageComponent,
     OrderComponent,
+    ProfilePageComponent,
   ],
   imports: [
     BrowserModule,

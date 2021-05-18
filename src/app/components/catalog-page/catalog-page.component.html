@@ -3,7 +3,6 @@
   class="example-chip">
   <mat-chip
     class="example-box"
-    cdkDrag
     *ngFor="let psychologistTag of psychologistTags" [class.mat-chip-selected]="psychologistTag.selected"
     (click)="changeSelected(psychologistTag)">
     {{psychologistTag.name}}
