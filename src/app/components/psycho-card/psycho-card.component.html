@@ -1,33 +1,32 @@
 <head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
-<mat-card>
-  <div style="width: 200px" class="card">
+<!--<mat-card>-->
+  <div style="width: 225px; height: 367px;" class="card">
     <!--assets/man.png if null to do-->
     <div class="card-image">
       <img src="{{psychologist.avatarUrl ? psychologist.avatarUrl : 'assets/man.png'}}">
     </div>
-    <p style="text-align: center; size: 12px" class="card-title">
+    <p style="text-align: center; size: 12px; height: 40px" class="card-title">
       Dr. {{psychologist.firstName}} {{psychologist.lastName}}</p>
     <div class="card-content">
-      <span>Mobile phone:</span><a href="tel:{{psychologist.mobile}}">{{psychologist.mobile}}</a>
+      <span>Mobile:</span><a href="tel:{{psychologist.mobile}}">{{psychologist.mobile}}</a>
       <p>Education: {{psychologist.education}}</p>
-      <p>Tags:</p>
-      <p>
-        <mat-chip-list
-          class="example-chip">
-          <mat-chip
-            class="example-box"
-            disabled
-            *ngFor="let tag of psychologist.tags">
-            {{tag.name}}
-          </mat-chip>
-        </mat-chip-list>
-      </p>
+<!--      <p>Tags:</p>-->
+<!--      <p>-->
+<!--        <mat-chip-list-->
+<!--          class="example-chip">-->
+<!--          <mat-chip-->
+<!--            class="example-box"-->
+<!--            disabled-->
+<!--            *ngFor="let tag of psychologist.tags">-->
+<!--            {{tag.name}}-->
+<!--          </mat-chip>-->
+<!--        </mat-chip-list>-->
+<!--      </p>-->
     </div>
     <div class="card-action">
-      <a routerLink="/appointment/{{psychologist.id}}">Запись на приём</a>
+      <a routerLink="/appointment/{{psychologist.id}}">Запись</a>
+      <a style="float: right" routerLink="">Профиль</a>
     </div>
   </div>
-</mat-card>
+<!--</mat-card>-->
