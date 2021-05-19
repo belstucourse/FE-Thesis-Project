@@ -71,6 +71,7 @@ import {FlexModule} from '@angular/flex-layout';
 import {HttpClientModule} from '@angular/common/http';
 import { OrderComponent } from './components/order/order.component';
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
+import { AppFeedbackPageComponent } from './components/app-feedback-page/app-feedback-page.component';
 
 const routes = [
   {path: '', component: HomePageComponent},
@@ -85,7 +86,8 @@ const routes = [
   {path: 'blog', component: BlogPageComponent},
   {path: 'chat', component: ChatComponent},
   {path: 'order', component: OrderComponent},
-  {path: 'profile', component: ProfilePageComponent}
+  {path: 'profile', component: ProfilePageComponent}, //TODO: provide  /:psychoId
+  {path: 'app-feedback', component: AppFeedbackPageComponent} //TODO дать ссылку откуда-нибудь
 ];
 
 @NgModule({
@@ -109,6 +111,7 @@ const routes = [
     ChatMessageComponent,
     OrderComponent,
     ProfilePageComponent,
+    AppFeedbackPageComponent,
   ],
   imports: [
     BrowserModule,
