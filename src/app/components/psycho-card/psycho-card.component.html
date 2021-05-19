@@ -2,17 +2,32 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
-<div class="col s3">
-  <div class="card">
+<mat-card>
+  <div style="width: 200px" class="card">
+    <!--assets/man.png if null to do-->
     <div class="card-image">
-      <img src="assets/man.png">
+      <img src="{{psychologist.avatarUrl ? psychologist.avatarUrl : 'assets/man.png'}}">
     </div>
-    <p style="text-align: center" class="card-title">Herman Samolazov</p>
+    <p style="text-align: center; size: 12px" class="card-title">
+      Dr. {{psychologist.firstName}} {{psychologist.lastName}}</p>
     <div class="card-content">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusantium aperiam expedita, fugiat, harum inventore itaque iure non obcaecati perferendis possimus temporibus vel velit? Cumque ipsum itaque odit quam quasi.</p>
+      <span>Mobile phone:</span><a href="tel:{{psychologist.mobile}}">{{psychologist.mobile}}</a>
+      <p>Education: {{psychologist.education}}</p>
+      <p>Tags:</p>
+      <p>
+        <mat-chip-list
+          class="example-chip">
+          <mat-chip
+            class="example-box"
+            disabled
+            *ngFor="let tag of psychologist.tags">
+            {{tag.name}}
+          </mat-chip>
+        </mat-chip-list>
+      </p>
     </div>
     <div class="card-action">
-      <a routerLink="/appointment">Запись на приём</a>
+      <a routerLink="/appointment/{{psychologist.id}}">Запись на приём</a>
     </div>
   </div>
-</div>
+</mat-card>

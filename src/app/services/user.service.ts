@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Observable, ReplaySubject, Subject} from 'rxjs';
 import {User} from '../models/user/user';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Client} from '../models/user/client';
 import {Psychologist} from '../models/user/psychologist';
+import {PagePsychologist} from '../models/pagePsychologist';
 
 @Injectable({
   providedIn: 'root'
@@ -36,4 +37,9 @@ export class UserService {
     return 'mobile' in object && 'tags' in object;
   }
 
+  public getDoctorsByTagNames(tagNames: string[]): Observable<PagePsychologist> {
+    let params = new HttpParams();
+    tagNames.forEach((name: string) => params = params.append('tagNames', name));
+    return this.httpClient.get<PagePsychologist>('api/users/doctors', {params});
+  }
 }

@@ -1,4 +1,14 @@
 <h3 style="text-align: center">Наши специалисты</h3>
+<mat-chip-list
+  class="example-chip">
+  <mat-chip
+    class="example-box"
+    *ngFor="let psychologistTag of psychologistTags" [class.mat-chip-selected]="psychologistTag.selected"
+    (click)="changeSelected(psychologistTag)">
+    {{psychologistTag.name}}
+  </mat-chip>
+</mat-chip-list>
 <div class="row">
-    <app-psycho-card></app-psycho-card>
+    <app-psycho-card *ngFor="let psychologist of psychologists"
+    [psychologist]="psychologist"></app-psycho-card>
 </div>
