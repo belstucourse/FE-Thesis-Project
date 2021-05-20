@@ -86,7 +86,7 @@ const routes = [
   {path: 'blog', component: BlogPageComponent},
   {path: 'chat', component: ChatComponent},
   {path: 'order', component: OrderComponent},
-  {path: 'profile', component: ProfilePageComponent}, //TODO: provide  /:psychoId
+  {path: 'profile/:userId', component: ProfilePageComponent}, //TODO: provide  /:psychoId
   {path: 'app-feedback', component: AppFeedbackPageComponent} //TODO дать ссылку откуда-нибудь
 ];
 

@@ -17,10 +17,10 @@
         <div class="card">
           <div class="card-body text-center bg-primary rounded-top">
             <div class="user-box">
-              <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user avatar">
+              <img src="{{user.avatarUrl ? user.avatarUrl : 'assets/man.png'}}">
             </div>
-            <h5 class="mb-1 text-white">Jhon Doe</h5>
-            <h6 class="text-light">UI/UX Engineer</h6>
+            <h5 class="mb-1 text-white">{{user.firstName}} {{user.middleName}} {{user.lastName}}</h5>
+            <h6 class="text-light"></h6>
           </div>
           <div class="card-body">
             <ul class="list-group shadow-none">
@@ -38,7 +38,7 @@
                   <i class="fa fa-envelope"></i>
                 </div>
                 <div class="list-details">
-                  <span>info@example.com</span>
+                  <span>{{user.email}}</span>
                   <small>Email Address</small>
                 </div>
               </li>
@@ -47,8 +47,8 @@
                   <i class="fa fa-globe"></i>
                 </div>
                 <div class="list-details">
-                  <span>www.example.com</span>
-                  <small>Website Address</small>
+                  <span>{{user.registerDate}}</span>
+                  <small>Дата регистрации</small>
                 </div>
               </li>
             </ul>
