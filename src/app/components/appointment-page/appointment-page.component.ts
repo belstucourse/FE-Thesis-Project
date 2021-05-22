@@ -15,10 +15,9 @@ import {DatePipe} from '@angular/common';
 })
 export class AppointmentPageComponent implements OnInit {
   public psychologist: Psychologist;
-  public activeUser: User;
   public timeslots: PsychoAvailableTimeslot[];
   public datepipe: DatePipe = new DatePipe('en-US');
-  public selectedDate: Date;
+  public selectedDate: string;
 
   constructor(private activatedRoute: ActivatedRoute,
               private userService: UserService,
@@ -36,9 +35,6 @@ export class AppointmentPageComponent implements OnInit {
             this.timeslots = timeslots;
           });
         });
-        this.userService.activeUser.subscribe((user: User) => {
-          this.activeUser = user;
-        });
       }
     );
 
@@ -46,16 +42,18 @@ export class AppointmentPageComponent implements OnInit {
 
   chooseTimeslotEvent($event) {
     let elementId: string = $event.target.id;
-    this.selectedDate = new Date(elementId);
+    this.selectedDate = elementId;
   }
 
   bookAppointment() {
-    this.router.navigate(['/order'], {
-      queryParams: {
-        'clientId': this.activeUser.id,
-        'psychologistId': this.psychologist.id,
-        'date': this.selectedDate
-      }
+    this.userService.activeUser.subscribe((user: User) => {
+      this.router.navigate(['/order'], {
+        queryParams: {
+          'clientId': user.id,
+          'psychologistId': this.psychologist.id,
+          'date': this.selectedDate
+        }
+      });
     });
     // this.workdayService.bookAppointment(this.selectedDate, this.activeUser.id, );
   }

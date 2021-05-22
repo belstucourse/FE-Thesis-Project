@@ -68,10 +68,12 @@ import {ChatHeaderComponent} from './components/chat/chat-header/chat-header.com
 import {ChatControlsComponent} from './components/chat/chat-controls/chat-controls.component';
 import {ChatMessageComponent} from './components/chat/chat-message/chat-message.component';
 import {FlexModule} from '@angular/flex-layout';
-import {HttpClientModule} from '@angular/common/http';
-import { OrderComponent } from './components/order/order.component';
-import { ProfilePageComponent } from './components/profile-page/profile-page.component';
-import { AppFeedbackPageComponent } from './components/app-feedback-page/app-feedback-page.component';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {OrderComponent} from './components/order/order.component';
+import {ProfilePageComponent} from './components/profile-page/profile-page.component';
+import {AppFeedbackPageComponent} from './components/app-feedback-page/app-feedback-page.component';
+import {AuthInterceptor} from './services/auth-interceptor';
+import {JwtInterceptor} from './services/jwt-interceptor';
 
 const routes = [
   {path: '', component: HomePageComponent},
@@ -167,7 +169,18 @@ const routes = [
     FlexModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
