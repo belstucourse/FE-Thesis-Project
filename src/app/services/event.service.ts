@@ -8,9 +8,14 @@ import {Event} from '../models/workday/event';
 })
 export class EventService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+  }
 
   public saveOrder(event: Event): Observable<Event> {
     return this.httpClient.post<Event>('/api/event', event);
+  }
+
+  public getEventsOfPsycho(psychoId: string): Observable<Event[]> {
+    return this.httpClient.get<Event[]>('/api/event/' + psychoId);
   }
 }

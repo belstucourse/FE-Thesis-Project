@@ -33,11 +33,15 @@ export class UserService{
     return this.httpClient.post<User>('/api/users', user);
   }
 
-  private isClient(object: User): object is Client {
+  public updateUser(user: User): Observable<User> {
+    return this.httpClient.put<User>('/api/users', user);
+  }
+
+  public isClient(object: User): object is Client {
     return 'birthdayDate' in object;
   }
 
-  private isPsychologist(object: User): object is Psychologist {
+  public isPsychologist(object: User): object is Psychologist {
     return 'mobile' in object && 'tags' in object;
   }
 
