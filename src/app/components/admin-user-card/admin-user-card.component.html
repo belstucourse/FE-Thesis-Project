@@ -1,5 +1,8 @@
 <div class="user-card-div">
-  <td style="padding-right: 20px">Айди</td>
-  <td style="padding-right: 20px">Имя</td>
-  <td style="padding-right: 20px"><button>Деактивировать</button></td>
+
+  <td >{{user.id}}</td>
+  <td >{{user.firstName + " " + user.middleName + " " + user.lastName}}</td>
+  <td ><button (click)="updateUser()"> {{user.deactivated? 'активировать' : 'деактивировать'}} </button></td>
+  <td >active: {{!user.deactivated}}</td>
+  <td ><a  href="/profile/{{user.id}}">Профиль</a></td>
 </div>

@@ -10,6 +10,7 @@
   <script src="http://netdna.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div [ngClass]="{'disabled' : user.deactivated}">
 <div class="container">
   <div class="row">
     <div class="col-lg-4">
@@ -260,6 +261,7 @@
     </div>
 
   </div>
+</div>
 </div>
 </body>
 </html>

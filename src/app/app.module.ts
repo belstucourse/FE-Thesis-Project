@@ -75,6 +75,8 @@ import {AppFeedbackPageComponent} from './components/app-feedback-page/app-feedb
 import {AuthInterceptor} from './services/auth-interceptor';
 import {JwtInterceptor} from './services/jwt-interceptor';
 import { AppointmentDashboardComponent } from './components/appointment-dashboard/appointment-dashboard.component';
+import {AdminUserDashboardComponent} from "./components/admin-user-dashboard/admin-user-dashboard.component";
+import {AdminUserCardComponent} from "./components/admin-user-card/admin-user-card.component";
 
 const routes = [
   {path: '', component: HomePageComponent},
@@ -91,8 +93,8 @@ const routes = [
   {path: 'order', component: OrderComponent},
   {path: 'profile/:userId', component: ProfilePageComponent}, //TODO: provide  /:psychoId
   {path: 'app-feedback', component: AppFeedbackPageComponent},
-  {path: 'psychoAppointments', component: AppointmentDashboardComponent}
-
+  {path: 'psychoAppointments', component: AppointmentDashboardComponent},
+  {path: 'admin', component: AdminUserDashboardComponent}
 ];
 
 @NgModule({
@@ -118,6 +120,8 @@ const routes = [
     ProfilePageComponent,
     AppFeedbackPageComponent,
     AppointmentDashboardComponent,
+    AdminUserDashboardComponent,
+    AdminUserCardComponent
   ],
   imports: [
     BrowserModule,

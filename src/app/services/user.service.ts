@@ -44,4 +44,8 @@ export class UserService {
     tagNames.forEach((name: string) => params = params.append('tagNames', name));
     return this.httpClient.get<PagePsychologist>('api/users/doctors', {params});
   }
+
+  public getAllUsers(): Observable<User[]>{
+    return this.httpClient.get<User[]>('api/users/all')
+  }
 }
