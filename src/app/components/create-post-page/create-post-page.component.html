@@ -1,13 +1,19 @@
 <body>
 <div class="container">
-  <form id="post_form" class="form">
+  <form id="post_form" class="form" [formGroup]="postForm"  (ngSubmit)="onSubmit()">
     <div class="input-field">
       <label for="subject">Тема</label>
-      <input type="text" id="subject" name="subject">
+      <input type="text" id="subject" name="subject" formControlName="title">
     </div>
     <div class="input-field">
       <label for="post_text">Текст</label>
-      <textarea id="post_text" name="post_text" form="post_form" rows="15"></textarea>
+      <textarea id="post_text" name="post_text" form="post_form" rows="15" formControlName="text"></textarea>
+    </div>
+    <div class="input-field">
+      <label class="col-lg-3 col-form-label form-control-label">Прикрепить файл к посту</label>
+      <div class="col-lg-9">
+        <input class="form-control" type="file" (change)="onFileChange($event.target.files)" formControlName="file">
+      </div>
     </div>
     <div class="action">
       <button id="btn" class="btn">Опубликовать</button>

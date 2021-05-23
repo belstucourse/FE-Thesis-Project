@@ -94,6 +94,7 @@ const routes = [
   {path: 'profile/:userId', component: ProfilePageComponent}, //TODO: provide  /:psychoId
   {path: 'app-feedback', component: AppFeedbackPageComponent},
   {path: 'psychoAppointments', component: AppointmentDashboardComponent},
+  {path: 'post/:postId', component: BlogCardComponent},
   {path: 'admin', component: AdminUserDashboardComponent}
 ];
 

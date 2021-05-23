@@ -21,10 +21,9 @@ import {AuthService} from '../../services/auth.service';
 export class AppointmentDashboardComponent implements OnInit {
   columnsToDisplay: string[] = [
     'id',
-    'Дата начала',
-    'Подтверждено',
-    'Ссылка на чат',
-    'Подтвердить'
+    'date',
+    'isConfirmed',
+    'roomId'
   ];
   expandedElement: Event | null;
   dataSource: Event[];
@@ -43,4 +42,21 @@ export class AppointmentDashboardComponent implements OnInit {
 
   }
 
+  confirm(element: Event) {
+    element.isConfirmed = true;
+    this.eventService.saveOrder(element).subscribe((event: Event) => {
+      for (let item of this.dataSource) {
+        item.isConfirmed = item.id === event.id ? event.isConfirmed : item.isConfirmed;
+      }
+    });
+  }
+
+  reject(element: Event) {
+    element.isConfirmed = false;
+    this.eventService.saveOrder(element).subscribe((event: Event) => {
+      for (let item of this.dataSource) {
+        item.isConfirmed = item.id === event.id ? event.isConfirmed : item.isConfirmed;
+      }
+    });
+  }
 }

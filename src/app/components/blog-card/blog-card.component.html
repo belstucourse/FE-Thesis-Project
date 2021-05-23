@@ -2,13 +2,20 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
-<div class="col s12">
+<div class="col s12" *ngIf="user===null">
   <div class="card">
     <div style="text-align: center" class="card-content">
-      <p>Заголовок статьи</p>
+      <p>{{post.title}}</p>
     </div>
     <div class="card-action">
-      <a routerLink="/appointment">Читать</a>
+      <a routerLink="/post/{{post.id}}">Читать</a>
     </div>
+  </div>
+</div>
+<div class="hero-image" *ngIf="user!==null">
+  <div class="hero-text">
+    <h1>{{post.title}}</h1>
+    <p>{{post.text}}</p>
+    <button routerLink="/profile/{{post.psychologistId}}">Просмотреть профиль</button>
   </div>
 </div>
