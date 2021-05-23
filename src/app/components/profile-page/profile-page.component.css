@@ -9,6 +9,12 @@ body{
 
 }
 
+.disabled{
+  user-select: none;
+  pointer-events: none;
+  opacity: 0.2;
+}
+
 .user-box img {
   width: 100%;
   border-radius: 50%;

@@ -74,7 +74,9 @@ import {ProfilePageComponent} from './components/profile-page/profile-page.compo
 import {AppFeedbackPageComponent} from './components/app-feedback-page/app-feedback-page.component';
 import {AuthInterceptor} from './services/auth-interceptor';
 import {JwtInterceptor} from './services/jwt-interceptor';
-import {AppointmentDashboardComponent} from './components/appointment-dashboard/appointment-dashboard.component';
+import { AppointmentDashboardComponent } from './components/appointment-dashboard/appointment-dashboard.component';
+import {AdminUserDashboardComponent} from "./components/admin-user-dashboard/admin-user-dashboard.component";
+import {AdminUserCardComponent} from "./components/admin-user-card/admin-user-card.component";
 
 const routes = [
   {path: '', component: HomePageComponent},
@@ -92,7 +94,8 @@ const routes = [
   {path: 'profile/:userId', component: ProfilePageComponent}, //TODO: provide  /:psychoId
   {path: 'app-feedback', component: AppFeedbackPageComponent},
   {path: 'psychoAppointments', component: AppointmentDashboardComponent},
-  {path: 'post/:postId', component: BlogCardComponent}
+  {path: 'post/:postId', component: BlogCardComponent},
+  {path: 'admin', component: AdminUserDashboardComponent}
 ];
 
 @NgModule({
@@ -118,6 +121,8 @@ const routes = [
     ProfilePageComponent,
     AppFeedbackPageComponent,
     AppointmentDashboardComponent,
+    AdminUserDashboardComponent,
+    AdminUserCardComponent
   ],
   imports: [
     BrowserModule,
