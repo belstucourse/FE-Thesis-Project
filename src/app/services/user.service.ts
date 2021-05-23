@@ -48,4 +48,8 @@ export class UserService {
   public getAllUsers(): Observable<User[]>{
     return this.httpClient.get<User[]>('api/users/all')
   }
+
+  public getAllPsychos(): Observable<Psychologist[]>{
+    return this.httpClient.get<Psychologist[]>('api/users/all-psycho')
+  }
 }

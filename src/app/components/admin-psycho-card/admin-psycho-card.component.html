@@ -1,0 +1,9 @@
+<div class="user-card-div">
+
+  <td >{{psychologist.id}}</td>
+  <td >{{psychologist.firstName + " " + psychologist.middleName + " " + psychologist.lastName}}</td>
+<!--  <td ><button (click)="updateUser()"> {{user.deactivated? 'активировать' : 'деактивировать'}} </button></td>-->
+<!--  <td >active: {{!user.deactivated}}</td>-->
+  <td ><a  href="/profile/{{psychologist.id}}">Профиль</a></td>
+</div>
+
