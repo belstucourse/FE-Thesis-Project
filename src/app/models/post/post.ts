@@ -1,7 +1,8 @@
 export interface Post {
-  id: string;
+  id?: string;
   title: string;
   text: string;
-  postDate: Date;
+  postDate?: Date;
   psychologistId: string;
+  photoUrl?: string;
 }

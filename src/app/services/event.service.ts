@@ -18,4 +18,8 @@ export class EventService {
   public getEventsOfPsycho(psychoId: string): Observable<Event[]> {
     return this.httpClient.get<Event[]>('/api/event/' + psychoId);
   }
+
+  public update(event: Event): Observable<Event> {
+    return this.httpClient.put<Event>('/api/event', event);
+  }
 }

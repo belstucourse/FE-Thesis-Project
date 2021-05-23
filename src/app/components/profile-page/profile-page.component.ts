@@ -58,7 +58,9 @@ export class ProfilePageComponent implements OnInit {
     };
     this.userService.updateUser(user).subscribe(user => {
       this.user = user;
-      this.fileUploaderService.saveFile(this.fileToUpload, user.id, FileType.AVATAR);
+      if (this.fileToUpload !== null) {
+        this.fileUploaderService.saveFile(this.fileToUpload, user.id, FileType.AVATAR);
+      }
     });
   }
 
