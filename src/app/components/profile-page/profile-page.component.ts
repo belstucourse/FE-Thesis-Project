@@ -5,6 +5,7 @@ import {User} from '../../models/user/user';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {FileUploaderService} from '../../services/file-uploader.service';
 import {FileType} from '../../models/file-type.enum';
+import {AuthService} from '../../services/auth.service';
 
 
 @Component({
@@ -23,16 +24,16 @@ export class ProfilePageComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private userService: UserService,
-              private fileUploaderService: FileUploaderService) {
+              private fileUploaderService: FileUploaderService,
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.userService.getUserById(params.get('userId')).subscribe(user => {
         this.user = user;
-        this.userService.activeUser.subscribe(currentUser => {
-          this.isActiveUserProfile = currentUser.id === user.id;
-        });
+        let currentUserId = this.authService.getUserIdByToken();
+        this.isActiveUserProfile = currentUserId === user.id;
       });
     });
     this.editForm = new FormGroup({
@@ -56,7 +57,6 @@ export class ProfilePageComponent implements OnInit {
       type: this.user.type
     };
     this.userService.updateUser(user).subscribe(user => {
-      this.userService.activeUser.next(user);
       this.user = user;
       this.fileUploaderService.saveFile(this.fileToUpload, user.id, FileType.AVATAR);
     });

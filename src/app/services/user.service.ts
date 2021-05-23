@@ -1,4 +1,4 @@
-import {Injectable, Injector, OnInit} from '@angular/core';
+import {Injectable, Injector} from '@angular/core';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {User} from '../models/user/user';
 import {HttpClient, HttpParams} from '@angular/common/http';
@@ -11,17 +11,11 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService{
-  private _activeUser: Subject<User>;
+export class UserService {
   private helper = new JwtHelperService();
 
   constructor(private httpClient: HttpClient,
               private injector: Injector) {
-    let id = this.helper.decodeToken(localStorage.getItem('token')).id;
-    this.getUserById(id)
-      .subscribe((user: User) => {
-        this._activeUser = new BehaviorSubject(user);
-      });
   }
 
   public getUserById(userId: string): Observable<User> {
@@ -50,17 +44,4 @@ export class UserService{
     tagNames.forEach((name: string) => params = params.append('tagNames', name));
     return this.httpClient.get<PagePsychologist>('api/users/doctors', {params});
   }
-
-  get activeUser(): Subject<User> {
-    this._activeUser.subscribe((user: User) => {
-      console.log(user);
-      if (user === null) {
-        const auth = this.injector.get<AuthService>(AuthService);
-        this.getUserById(auth.getUserIdByToken())
-          .subscribe((user: User) => this._activeUser.next(user));
-      }
-    });
-    return this._activeUser;
-  }
-
 }

@@ -3,6 +3,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 import {EventService} from '../../services/event.service';
 import {UserService} from '../../services/user.service';
 import {Event} from '../../models/workday/event';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-appointment-dashboard',
@@ -29,15 +30,16 @@ export class AppointmentDashboardComponent implements OnInit {
   dataSource: Event[];
 
   constructor(private eventService: EventService,
-              private userService: UserService) {
+              private userService: UserService,
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
-    this.userService.activeUser
+    this.userService.getUserById(this.authService.getUserIdByToken())
       .subscribe(user => this.eventService.getEventsOfPsycho(user.id)
-      .subscribe((events: Event[]) => {
-        this.dataSource = events;
-      }));
+        .subscribe((events: Event[]) => {
+          this.dataSource = events;
+        }));
 
   }
 

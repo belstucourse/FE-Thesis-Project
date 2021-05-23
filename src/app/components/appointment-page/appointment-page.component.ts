@@ -46,7 +46,7 @@ export class AppointmentPageComponent implements OnInit {
   }
 
   bookAppointment() {
-    this.userService.activeUser.subscribe((user: User) => {
+    this.userService.getUserById(this.authService.getUserIdByToken()).subscribe((user: User) => {
       this.router.navigate(['/order'], {
         queryParams: {
           'clientId': user.id,

@@ -14,8 +14,7 @@ export class AuthService {
   private helper = new JwtHelperService();
 
   constructor(private http: HttpClient,
-              private router: Router,
-              private injector: Injector) {
+              private router: Router) {
   }
 
   public getToken(): string {
@@ -33,19 +32,12 @@ export class AuthService {
         (token: AuthToken) => {
           const decodedToken = this.helper.decodeToken(token.token);
           localStorage.setItem('token', token.token);
-          const userService = this.injector.get<UserService>(UserService);
-          userService.getUserById(decodedToken.id)
-            .subscribe((user: User) => {
-              userService.activeUser.next(user);
-            });
           this.router.navigate(['/catalog']);
         });
   }
 
   logout() {
     localStorage.removeItem('token');
-    const userService = this.injector.get<UserService>(UserService);
-    userService.activeUser.next(null);
     this.router.navigate(['/']);
     this.http.post('api/logout', null).subscribe();
   }
