@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PsychoWorkday} from '../../models/workday/psycho-workday';
 import {WorkdayService} from '../../services/workday.service';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-psycho-workday',
@@ -9,10 +10,11 @@ import {WorkdayService} from '../../services/workday.service';
 })
 export class PsychoWorkdayComponent implements OnInit {
 
-  public displayedColumns = ['дата', 'начало', 'конец'];
+  public displayedColumns = ['date', 'start', 'end'];
   public dataSource: PsychoWorkday[];
 
-  constructor(private workdayService: WorkdayService) {
+  constructor(private workdayService: WorkdayService,
+              private authService: AuthService) {
   }
 
   updateEndDate(el: PsychoWorkday) {
@@ -26,6 +28,9 @@ export class PsychoWorkdayComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.workdayService.getPsychoWorkdaysOnWeek(this.authService.getUserIdByToken()).subscribe((timeslots:PsychoWorkday[])=>{
+      this.dataSource = timeslots;
+    });
   }
 
   updateStartDate(el: PsychoWorkday) {

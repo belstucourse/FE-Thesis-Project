@@ -74,17 +74,17 @@ import {ProfilePageComponent} from './components/profile-page/profile-page.compo
 import {AppFeedbackPageComponent} from './components/app-feedback-page/app-feedback-page.component';
 import {AuthInterceptor} from './services/auth-interceptor';
 import {JwtInterceptor} from './services/jwt-interceptor';
-import { AppointmentDashboardComponent } from './components/appointment-dashboard/appointment-dashboard.component';
-import {AdminUserDashboardComponent} from "./components/admin-user-dashboard/admin-user-dashboard.component";
-import {AdminUserCardComponent} from "./components/admin-user-card/admin-user-card.component";
-import { FullPostComponent } from './components/full-post/full-post.component';
-import { PsychoWorkdayComponent } from './components/psycho-workday/psycho-workday.component';
-import { BidiModule } from '@angular/cdk/bidi';
-import { PlatformModule } from '@angular/cdk/platform';
-import { ObserversModule } from '@angular/cdk/observers';
-import { AdminPsychoDashboardComponent } from './components/admin-psycho-dashboard/admin-psycho-dashboard.component';
-import { AdminPsychoCardComponent } from './components/admin-psycho-card/admin-psycho-card.component';
-import { UserScheduleComponent } from './components/user-shedule/user-schedule.component';
+import {AppointmentDashboardComponent} from './components/appointment-dashboard/appointment-dashboard.component';
+import {AdminUserDashboardComponent} from './components/admin-user-dashboard/admin-user-dashboard.component';
+import {AdminUserCardComponent} from './components/admin-user-card/admin-user-card.component';
+import {FullPostComponent} from './components/full-post/full-post.component';
+import {PsychoWorkdayComponent} from './components/psycho-workday/psycho-workday.component';
+import {BidiModule} from '@angular/cdk/bidi';
+import {PlatformModule} from '@angular/cdk/platform';
+import {ObserversModule} from '@angular/cdk/observers';
+import {AdminPsychoDashboardComponent} from './components/admin-psycho-dashboard/admin-psycho-dashboard.component';
+import {AdminPsychoCardComponent} from './components/admin-psycho-card/admin-psycho-card.component';
+import {UserScheduleComponent} from './components/user-shedule/user-schedule.component';
 
 const routes = [
   {path: '', component: HomePageComponent},
