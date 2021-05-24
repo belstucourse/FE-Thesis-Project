@@ -19,10 +19,20 @@ export class AppComponent {
   isAdmin: boolean;
 
   async logout(): Promise<void> {
-    // todo
+    this.isAuthenticated = false;
+    localStorage.clear();
   }
 
   constructor(private authService: AuthService, private userService: UserService) {
+    if(authService.getToken() != null)
+    {
+      this.isAuthenticated = true;
+    }
+    else
+    {
+      this.isAuthenticated = false;
+
+    }
     this.authService.currentUser.subscribe((user: User) => {
       if (user != null) {
         this.userId = this.authService.getUserIdByToken();
