@@ -1,0 +1,12 @@
+.user-card-div{
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-card-div td{
+  text-align: left;
+  padding: 5px 20px;
+}

@@ -7,4 +7,5 @@ export interface Psychologist extends User {
   mobile: string;
   tags?: Array<Tag>;
   education?: string;
+  sertificateUrl?: string;
 }

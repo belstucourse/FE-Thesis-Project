@@ -82,6 +82,9 @@ import { PsychoWorkdayComponent } from './components/psycho-workday/psycho-workd
 import { BidiModule } from '@angular/cdk/bidi';
 import { PlatformModule } from '@angular/cdk/platform';
 import { ObserversModule } from '@angular/cdk/observers';
+import { AdminPsychoDashboardComponent } from './components/admin-psycho-dashboard/admin-psycho-dashboard.component';
+import { AdminPsychoCardComponent } from './components/admin-psycho-card/admin-psycho-card.component';
+
 const routes = [
   {path: '', component: HomePageComponent},
   {path: 'catalog', component: CatalogPageComponent},
@@ -100,7 +103,8 @@ const routes = [
   {path: 'psychoAppointments', component: AppointmentDashboardComponent},
   {path: 'post/:postId', component: FullPostComponent},
   {path: 'admin', component: AdminUserDashboardComponent},
-  {path: 'workday', component: PsychoWorkdayComponent}
+  {path: 'workday', component: PsychoWorkdayComponent},
+  {path: 'admin-p', component: AdminPsychoDashboardComponent}
 ];
 
 @NgModule({
@@ -127,9 +131,11 @@ const routes = [
     AppFeedbackPageComponent,
     AppointmentDashboardComponent,
     AdminUserDashboardComponent,
-    AdminUserCardComponent,
     FullPostComponent,
-    PsychoWorkdayComponent
+    PsychoWorkdayComponent,
+    AdminUserCardComponent,
+    AdminPsychoDashboardComponent,
+    AdminPsychoCardComponent
   ],
   imports: [
     BidiModule,
