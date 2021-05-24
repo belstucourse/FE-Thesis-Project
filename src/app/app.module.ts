@@ -79,6 +79,7 @@ import {AdminUserDashboardComponent} from "./components/admin-user-dashboard/adm
 import {AdminUserCardComponent} from "./components/admin-user-card/admin-user-card.component";
 import { AdminPsychoDashboardComponent } from './components/admin-psycho-dashboard/admin-psycho-dashboard.component';
 import { AdminPsychoCardComponent } from './components/admin-psycho-card/admin-psycho-card.component';
+import { AboutComponent } from './components/about/about.component';
 
 const routes = [
   {path: '', component: HomePageComponent},
@@ -99,6 +100,7 @@ const routes = [
   {path: 'admin', component: AdminUserDashboardComponent},
   {path: 'admin-p', component: AdminPsychoDashboardComponent},
   {path: 'post/:postId', component: BlogCardComponent},
+  {path: 'about', component: AboutComponent}
 ];
 
 @NgModule({
@@ -127,7 +129,8 @@ const routes = [
     AdminUserDashboardComponent,
     AdminUserCardComponent,
     AdminPsychoDashboardComponent,
-    AdminPsychoCardComponent
+    AdminPsychoCardComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
