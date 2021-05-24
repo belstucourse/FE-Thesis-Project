@@ -6,15 +6,16 @@ import {Router} from '@angular/router';
 import {UserLogin} from '../models/user/user-login';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {AuthToken} from '../models/auth-token';
+import {BehaviorSubject, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private helper = new JwtHelperService();
-
+  public currentUser :Subject<User> = new BehaviorSubject(null);
   constructor(private http: HttpClient,
-              private router: Router) {
+              private router: Router, private userService: UserService) {
   }
 
   public getToken(): string {
@@ -22,7 +23,9 @@ export class AuthService {
   }
 
   public getUserIdByToken(): string {
-    return this.helper.decodeToken(localStorage.getItem('token')).id;
+    return this.helper.decodeToken(localStorage.getItem('token'))?
+      this.helper.decodeToken(localStorage.getItem('token')).id
+      : "" ;
   }
 
 
@@ -32,6 +35,10 @@ export class AuthService {
         (token: AuthToken) => {
           const decodedToken = this.helper.decodeToken(token.token);
           localStorage.setItem('token', token.token);
+          this.userService.getUserById(this.getUserIdByToken()).subscribe(user=>
+          {
+            this.currentUser.next(user)
+          })
           this.router.navigate(['/catalog']);
         });
   }

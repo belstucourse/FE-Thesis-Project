@@ -7,25 +7,37 @@
       <mat-icon>article</mat-icon>
       Блог
     </button>
-    <button mat-button routerLink="/about" *ngIf="!isAuthenticated">
+    <button mat-button routerLink="/about" >
       <mat-icon>lightbulb</mat-icon>
       О нас
     </button>
-    <button mat-button routerLink="/catalog" *ngIf="!isAuthenticated">
+    <button mat-button routerLink="/catalog">
       <mat-icon>medication</mat-icon>
       Специалисты
     </button>
 
-    <button mat-button routerLink="/costs" *ngIf="!isAuthenticated">
+    <button mat-button routerLink="/costs" >
       <mat-icon>payments</mat-icon>
       Цены
     </button>
 
 
+    <button mat-button routerLink="/costs" *ngIf="isAuthenticated && isAdmin">
+      <mat-icon>payments</mat-icon>
+      Пользователи
+    </button>
+    <button mat-button routerLink="/costs" *ngIf="isAuthenticated && isAdmin">
+      <mat-icon>payments</mat-icon>
+      Психологи
+    </button>
 
     <button mat-button routerLink="/signin" *ngIf="!isAuthenticated">
       <mat-icon>how_to_reg</mat-icon>
       Вход
+    </button>
+    <button mat-button routerLink="/profile/{{getCurrentUserId()}}" *ngIf="isAuthenticated">
+      <mat-icon>person</mat-icon>
+      Профиль
     </button>
     <button mat-button *ngIf="isAuthenticated" (click)="logout()">
       <mat-icon>exit_to_app</mat-icon>
