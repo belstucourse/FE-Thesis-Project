@@ -23,7 +23,7 @@ export class ProfilePageComponent implements OnInit {
   fileToUpload: File = null;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private userService: UserService,
+              public userService: UserService,
               private fileUploaderService: FileUploaderService,
               private authService: AuthService) {
   }
