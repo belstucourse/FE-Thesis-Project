@@ -77,7 +77,11 @@ import {JwtInterceptor} from './services/jwt-interceptor';
 import { AppointmentDashboardComponent } from './components/appointment-dashboard/appointment-dashboard.component';
 import {AdminUserDashboardComponent} from "./components/admin-user-dashboard/admin-user-dashboard.component";
 import {AdminUserCardComponent} from "./components/admin-user-card/admin-user-card.component";
-
+import { FullPostComponent } from './components/full-post/full-post.component';
+import { PsychoWorkdayComponent } from './components/psycho-workday/psycho-workday.component';
+import { BidiModule } from '@angular/cdk/bidi';
+import { PlatformModule } from '@angular/cdk/platform';
+import { ObserversModule } from '@angular/cdk/observers';
 const routes = [
   {path: '', component: HomePageComponent},
   {path: 'catalog', component: CatalogPageComponent},
@@ -94,8 +98,9 @@ const routes = [
   {path: 'profile/:userId', component: ProfilePageComponent}, //TODO: provide  /:psychoId
   {path: 'app-feedback', component: AppFeedbackPageComponent},
   {path: 'psychoAppointments', component: AppointmentDashboardComponent},
-  {path: 'post/:postId', component: BlogCardComponent},
-  {path: 'admin', component: AdminUserDashboardComponent}
+  {path: 'post/:postId', component: FullPostComponent},
+  {path: 'admin', component: AdminUserDashboardComponent},
+  {path: 'workday', component: PsychoWorkdayComponent}
 ];
 
 @NgModule({
@@ -122,9 +127,14 @@ const routes = [
     AppFeedbackPageComponent,
     AppointmentDashboardComponent,
     AdminUserDashboardComponent,
-    AdminUserCardComponent
+    AdminUserCardComponent,
+    FullPostComponent,
+    PsychoWorkdayComponent
   ],
   imports: [
+    BidiModule,
+    PlatformModule,
+    ObserversModule,
     BrowserModule,
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
