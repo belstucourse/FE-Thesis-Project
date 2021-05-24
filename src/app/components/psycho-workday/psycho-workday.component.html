@@ -53,8 +53,34 @@
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
     </mat-table>
 
   </div>
+  <mat-card>
+    <mat-card-content>
+      <form [formGroup]="workdayForm" (ngSubmit)="addWorkday()">
+        <mat-form-field appearance="fill" style="width: 100%">
+          <mat-label>Дата рабочего дня</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
 
+      </form>
+      <input type="time" (click)="openStart()" value="{{selectedStartTime}}">
+      <input type="time" (click)="openEnd()" value="{{selectedEndTime}}">
+    </mat-card-content>
+  </mat-card>
+  <div layout="row" ng-cloak>
+    <div layout="row" style="width: 100%;">
+      <div flex>
+        <div style="float: right;">
+          <button mat-fab color="warn" aria-label="Example icon button with a home icon">
+            <mat-icon (click)="addWorkday()">add</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

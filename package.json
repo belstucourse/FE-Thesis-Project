@@ -27,6 +27,7 @@
     "@auth0/angular-jwt": "^5.0.2",
     "@stomp/ng2-stompjs": "^8.0.0",
     "@stomp/stompjs": "^6.1.0",
+    "amazing-time-picker": "^1.8.0",
     "lesshat": "^4.1.0",
     "moment": "^2.29.1",
     "ngx-bootstrap": "^6.2.0",

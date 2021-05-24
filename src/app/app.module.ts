@@ -86,6 +86,7 @@ import { AdminPsychoDashboardComponent } from './components/admin-psycho-dashboa
 import { AdminPsychoCardComponent } from './components/admin-psycho-card/admin-psycho-card.component';
 import { AboutComponent } from './components/about/about.component';
 import { UserScheduleComponent } from './components/user-shedule/user-schedule.component';
+import {AmazingTimePickerModule} from 'amazing-time-picker';
 
 
 const routes = [
@@ -198,7 +199,8 @@ const routes = [
     OverlayModule,
     NgxMatFileInputModule,
     FlexModule,
-    HttpClientModule
+    HttpClientModule,
+    AmazingTimePickerModule
   ],
   providers: [
     {
