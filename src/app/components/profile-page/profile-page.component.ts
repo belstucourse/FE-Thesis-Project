@@ -19,7 +19,7 @@ export class ProfilePageComponent implements OnInit {
   public isActiveUserProfile: boolean;
   public isPsycho: boolean;
   public isClient: boolean;
-  public isAdmin: boolean;
+
   fileToUpload: File = null;
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -34,6 +34,9 @@ export class ProfilePageComponent implements OnInit {
         this.user = user;
         let currentUserId = this.authService.getUserIdByToken();
         this.isActiveUserProfile = currentUserId === user.id;
+        this.isPsycho = this.userService.isPsychologist(user);
+        this.isClient = this.userService.isClient(user);
+        this.isClient = this.userService.isClient(user);
       });
     });
     this.editForm = new FormGroup({

@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {EventService} from '../../services/event.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Event} from '../../models/workday/event';
 
 @Component({
   selector: 'app-feedback-page',
@@ -6,10 +10,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./feedback-page.component.css']
 })
 export class FeedbackPageComponent implements OnInit {
+  feedbackForm: FormGroup;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private eventService: EventService,
+              private activatedRoute: ActivatedRoute,
+              private router: Router) {
   }
 
+  ngOnInit(): void {
+    this.feedbackForm = new FormGroup({
+      feedback: new FormControl('', [Validators.required]),
+    });
+  }
+
+  onSubmit() {
+
+    this.activatedRoute.paramMap.subscribe((params) => {
+      let roomId = params.get('roomId');
+      this.eventService.getByRoomId(roomId).subscribe((event: Event) => {
+        event.feedback = this.feedbackForm.controls['feedback'].value;
+        this.eventService.update(event).subscribe((event) => this.router.navigate(['/catalog']));
+      });
+    });
+  }
 }

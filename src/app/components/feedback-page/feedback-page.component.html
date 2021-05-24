@@ -1,9 +1,9 @@
 <body>
 <div class="container">
-  <form id="feedback_form" class="form">
+  <form id="feedback_form" class="form" [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
     <div class="input-field">
       <label for="feedback">Ваш отзыв о специалисте</label>
-      <textarea id="feedback" name="feedback" form="feedback_form"></textarea>
+      <textarea id="feedback" name="feedback" form="feedback_form" formControlName="feedback"></textarea>
     </div>
     <div class="action">
       <button id="btn" class="btn">Отправить</button>

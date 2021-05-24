@@ -1,0 +1,60 @@
+<div style="padding: 32px">
+
+  <div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource">
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Дата </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.date}} </mat-cell>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="symbol">
+        <mat-header-cell *matHeaderCellDef> Начало рабочего дня </mat-header-cell>
+        <mat-cell *matCellDef="let element" [satPopoverAnchorFor]="p" (click)="p.open()">
+          <ng-container *ngIf="element.startDateTime">
+            {{element.startDateTime}}
+          </ng-container>
+          <span class="add-comment" *ngIf="!element.startDateTime">
+            Добавить начало рабочего дня
+          </span>
+
+          <sat-popover #p
+                       hasBackdrop
+                       xAlign="start"
+                       yAlign="start"
+                       (closed)="updateStartDate(element)">
+            <inline-edit [value]="element.startDateTime"></inline-edit>
+          </sat-popover>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Comment Column -->
+      <ng-container matColumnDef="comment">
+        <mat-header-cell *matHeaderCellDef> Конец рабочего дня </mat-header-cell>
+        <mat-cell *matCellDef="let element" [satPopoverAnchorFor]="p" (click)="p.open()">
+          <ng-container *ngIf="element.endDateTime">
+            {{element.endDateTime}}
+          </ng-container>
+          <span class="add-comment" *ngIf="!element.endDateTime">
+            Добавить конец рабочего дня
+          </span>
+
+          <sat-popover #p
+                       hasBackdrop
+                       xAlign="start"
+                       yAlign="start"
+                       (closed)="updateEndDate(element)">
+            <inline-edit [value]="element.endDateTime"></inline-edit>
+          </sat-popover>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+  </div>
+
+</div>

@@ -1,0 +1,38 @@
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+<div class="col s12" >
+  <div class="card" *ngIf="!isEditable">
+    <img src="{{post.photoUrl?post.photoUrl:'assets/man.png'}}">
+    <div style="text-align: center" class="card-content">
+      <p>{{post.title}}</p>
+    </div>
+    <div style="text-align: center" class="card-content">
+      <p>{{post.text}}</p>
+    </div>
+    <div class="card-action">
+      <a routerLink="/profile/{{post.psychologistId}}">Перейти на профиль психолога</a>
+    </div>
+    <button mat-button *ngIf="post.psychologistId===currentUserId" (click)="edit()">Редактировать пост</button>
+  </div>
+  <mat-card *ngIf="isEditable">
+    <mat-card-content>
+      <form [formGroup]="postForm" (ngSubmit)="save()">
+        <mat-form-field appearance="standard" style="width: 100%">
+          <mat-label>Заголовок</mat-label>
+          <mat-icon matSuffix>title</mat-icon>
+          <input matInput placeholder="Заголовок" formControlName="title" required>
+        </mat-form-field>
+        <mat-form-field appearance="standard" style="width: 100%">
+          <mat-label>Статья</mat-label>
+          <mat-icon matSuffix>description</mat-icon>
+          <textarea matInput cdkTextareaAutosize placeholder="..." formControlName="text" required>
+          </textarea>
+        </mat-form-field>
+        <button mat-raised-button color="primary">Изменить</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+

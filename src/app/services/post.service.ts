@@ -28,7 +28,7 @@ export class PostService {
     return this.httpClient.post<Post>('/api/posts', post);
   }
 
-  public updateUser(post: Post): Observable<Post> {
+  public updatePost(post: Post): Observable<Post> {
     return this.httpClient.put<Post>('/api/posts', post);
   }
 
