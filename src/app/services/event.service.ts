@@ -11,6 +11,14 @@ export class EventService {
   constructor(private httpClient: HttpClient) {
   }
 
+  public getClientEvents(clientId: string): Observable<Event[]> {
+    return this.httpClient.get<Event[]>('api/event/' + clientId + '/client');
+  }
+
+  public getByRoomId(roomId: string): Observable<Event> {
+    return this.httpClient.get<Event>('api/event/room/' + roomId);
+  }
+
   public saveOrder(event: Event): Observable<Event> {
     return this.httpClient.post<Event>('/api/event', event);
   }

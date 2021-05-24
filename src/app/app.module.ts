@@ -84,6 +84,7 @@ import { PlatformModule } from '@angular/cdk/platform';
 import { ObserversModule } from '@angular/cdk/observers';
 import { AdminPsychoDashboardComponent } from './components/admin-psycho-dashboard/admin-psycho-dashboard.component';
 import { AdminPsychoCardComponent } from './components/admin-psycho-card/admin-psycho-card.component';
+import { UserScheduleComponent } from './components/user-shedule/user-schedule.component';
 
 const routes = [
   {path: '', component: HomePageComponent},
@@ -135,7 +136,8 @@ const routes = [
     PsychoWorkdayComponent,
     AdminUserCardComponent,
     AdminPsychoDashboardComponent,
-    AdminPsychoCardComponent
+    AdminPsychoCardComponent,
+    UserScheduleComponent
   ],
   imports: [
     BidiModule,

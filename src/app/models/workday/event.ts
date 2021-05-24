@@ -7,4 +7,5 @@ export interface Event {
   isConfirmed?: boolean;
   reasonForVisit: string;
   roomId?: String;
+  feedback?:string;
 }

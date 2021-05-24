@@ -19,8 +19,9 @@ export class PsychoWorkdayComponent implements OnInit {
     if (el == null) {
       return;
     }
-    this.workdayService.updateTimeslot(el).subscribe((workday: PsychoWorkday) => {
 
+    this.workdayService.updateTimeslot(el).subscribe((workday: PsychoWorkday) => {
+      this.dataSource.splice(this.dataSource.indexOf(workday), 1, workday);
     });
   }
 
@@ -30,34 +31,4 @@ export class PsychoWorkdayComponent implements OnInit {
   updateStartDate(el: PsychoWorkday) {
 
   }
-}
-
-export interface Element {
-  name: string;
-  symbol: string;
-  comment?: string;
-}
-
-const initialData: Element[] = [
-  {name: 'Hydrogen', symbol: 'H'},
-  {name: 'Helium', symbol: 'He'},
-  {name: 'Lithium', symbol: 'Li'},
-  {name: 'Beryllium', symbol: 'Be'},
-  {name: 'Boron', symbol: 'B'},
-  {name: 'Carbon', symbol: 'C'},
-  {name: 'Nitrogen', symbol: 'N'},
-  {name: 'Oxygen', symbol: 'O'},
-  {name: 'Fluorine', symbol: 'F'},
-  {name: 'Neon', symbol: 'Ne'},
-  {name: 'Sodium', symbol: 'Na'},
-  {name: 'Magnesium', symbol: 'Mg'},
-  {name: 'Aluminum', symbol: 'Al'},
-  {name: 'Silicon', symbol: 'Si'},
-  {name: 'Phosphorus', symbol: 'P'},
-  {name: 'Sulfur', symbol: 'S'},
-  {name: 'Chlorine', symbol: 'Cl'},
-  {name: 'Argon', symbol: 'Ar'},
-  {name: 'Potassium', symbol: 'K'},
-  {name: 'Calcium', symbol: 'Ca'},
-
 }
