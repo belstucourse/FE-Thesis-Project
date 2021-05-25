@@ -20,7 +20,7 @@
           {{element.reasonForVisit}}
         </div>
       </div>
-      <div class="example-element-description">
+      <div class="example-element-description" *ngIf="element.isConfirmed">
         <a href="http://localhost:8001?roomId={{element.roomId}}">Сслыка на видеоконференцию</a>
       </div>
     </td>

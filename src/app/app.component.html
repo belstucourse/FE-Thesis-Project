@@ -3,6 +3,10 @@
     <button mat-button routerLink="/">{{title}}</button>
   </span>
   <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+    <button routerLink="/create-post" *ngIf="isAuthenticated && isPsyhco" mat-button>
+      <mat-icon>edit</mat-icon>
+      Написать пост
+    </button>
     <button routerLink="/blog" mat-button>
       <mat-icon>article</mat-icon>
       Блог
@@ -11,6 +15,11 @@
       <mat-icon>lightbulb</mat-icon>
       О нас
     </button>
+    <button mat-button routerLink="/app-feedback" >
+      <mat-icon>feedback</mat-icon>
+      Оставить отзыв
+    </button>
+
     <button mat-button routerLink="/catalog">
       <mat-icon>medication</mat-icon>
       Специалисты

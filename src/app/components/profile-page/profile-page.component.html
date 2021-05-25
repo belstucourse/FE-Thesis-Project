@@ -92,7 +92,8 @@
               <!--/row-->
             </div>
             <div class="tab-pane" id="messages" *ngIf="isPsycho">
-              <app-psycho-workday></app-psycho-workday>
+              <app-psycho-workday [isActiveProfile]="isActiveUserProfile"></app-psycho-workday>
+<!--              <app-psycho-workday></app-psycho-workday>-->
             </div>
             <div class="tab-pane" id="edit" *ngIf="isActiveUserProfile">
               <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
