@@ -7,6 +7,10 @@ import {User} from '../../models/user/user';
 import {WorkdayService} from '../../services/workday.service';
 import {PsychoAvailableTimeslot} from '../../models/workday/psycho-available-timeslot';
 import {DatePipe} from '@angular/common';
+import {forEach} from "@angular-devkit/schematics";
+import {R3FactoryTarget, Target} from "@angular/compiler";
+import {newArray} from "@angular/compiler/src/util";
+import {type} from "os";
 
 @Component({
   selector: 'app-appointment-page',
@@ -18,6 +22,7 @@ export class AppointmentPageComponent implements OnInit {
   public timeslots: PsychoAvailableTimeslot[];
   public datepipe: DatePipe = new DatePipe('en-US');
   public selectedDate: string;
+  public timeIds : string[] = [];
 
   constructor(private activatedRoute: ActivatedRoute,
               private userService: UserService,
@@ -41,6 +46,14 @@ export class AppointmentPageComponent implements OnInit {
   }
 
   chooseTimeslotEvent($event) {
+    if(!this.timeIds.includes($event.target.id))
+    {
+       this.timeIds.push($event.target.id)
+    }
+    this.timeIds.forEach(function (value) {
+       document.getElementById(value).setAttribute("style", "background-color: none");
+    });
+    $event.target.setAttribute("style", "background-color: #6cb06b;border-radius:15px");
     let elementId: string = $event.target.id;
     this.selectedDate = elementId;
   }

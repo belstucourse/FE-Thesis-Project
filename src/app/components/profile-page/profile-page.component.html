@@ -18,7 +18,7 @@
         <div class="card">
           <div class="card-body text-center bg-primary rounded-top">
             <div class="user-box">
-              <img src="{{user.avatarUrl ? user.avatarUrl : 'assets/man.png'}}">
+              <img style="max-height: 100%; max-width: 100%;  border-radius: 50% !important;height: 100px !important;  width: 100px !important; overflow: hidden !important; display: flex !important; justify-content: center !important; align-items: center !important;" src="{{user.avatarUrl ? user.avatarUrl : 'assets/man.png'}}">
             </div>
             <h5 class="mb-1 text-white">{{user.firstName}} {{user.middleName}} {{user.lastName}}</h5>
             <h6 class="text-light"></h6>
@@ -30,8 +30,9 @@
                   <i class="fa fa-phone-square"></i>
                 </div>
                 <div class="list-details">
-                  <span>9910XXXXXX</span>
-                  <small>Mobile Number</small>
+                  <span *ngIf="userService.isClient(this.user)">Клиент</span>
+                  <span *ngIf="!userService.isClient(this.user)">Психотерапевт</span>
+                  <small>Роль</small>
                 </div>
               </li>
               <li class="list-group-item">
@@ -40,7 +41,7 @@
                 </div>
                 <div class="list-details">
                   <span>{{user.email}}</span>
-                  <small>Email Address</small>
+                  <small>Электронная почта</small>
                 </div>
               </li>
               <li class="list-group-item">
@@ -68,27 +69,23 @@
         <div class="card-body">
           <ul class="nav nav-pills nav-pills-primary nav-justified">
             <li class="nav-item">
-              <a href="javascript:void(0);" data-target="#profile" data-toggle="pill" class="nav-link active show"><i class="icon-user"></i> <span class="hidden-xs">Profile</span></a>
+              <a href="javascript:void(0);" data-target="#profile" data-toggle="pill" class="nav-link active show"><i class="icon-user"></i> <span class="hidden-xs">Профиль</span></a>
             </li>
-            <li class="nav-item">
-              <a href="javascript:void(0);" data-target="#messages" data-toggle="pill" class="nav-link"><i class="icon-envelope-open"></i> <span class="hidden-xs">Messages</span></a>
+            <li class="nav-item" *ngIf="userService.isPsychologist(user)">
+              <a href="javascript:void(0);" data-target="#messages" data-toggle="pill" class="nav-link"><i class="icon-envelope-open"></i> <span class="hidden-xs">Рабочее время</span></a>
             </li>
             <li class="nav-item" *ngIf="isActiveUserProfile">
-              <a href="javascript:void(0);" data-target="#edit" data-toggle="pill" class="nav-link"><i class="icon-note"></i> <span class="hidden-xs">Edit</span></a>
+              <a href="javascript:void(0);" data-target="#edit" data-toggle="pill" class="nav-link"><i class="icon-note"></i> <span class="hidden-xs">Редактирование</span></a>
             </li>
           </ul>
           <div class="tab-content p-3">
             <div class="tab-pane active show" id="profile">
               <div class="row">
                 <div class="col-md-6">
-                  <h6>About</h6>
-                  <p>
-                    <span *ngIf="userService.isClient(this.user)">Клиент</span>
-                    <span *ngIf="!userService.isClient(this.user)">Психотерапевт</span>
-                  </p>
+<!--                  <h6>About</h6>-->
                 </div>
                 <div class="col-md-12">
-                  <h5 class="mt-2 mb-3"><span class="fa fa-clock-o ion-clock float-right"></span> Recent Activity</h5>
+<!--                  <h5 class="mt-2 mb-3"><span class="fa fa-clock-o ion-clock float-right"></span> Recent Activity</h5>-->
                   <app-appointment-dashboard [user]="user"></app-appointment-dashboard>
                 </div>
               </div>

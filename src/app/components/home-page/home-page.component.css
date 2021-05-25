@@ -2,6 +2,15 @@
   margin: 0;
   padding: 0;
 }
+.image-class-round{
+  border-radius: 50% !important;
+  height: 100px !important;
+  width: 100px !important;
+  overflow: hidden !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
 body {
   font-family: 'Roboto Mono', monospace;
   font-size: 18pt;
