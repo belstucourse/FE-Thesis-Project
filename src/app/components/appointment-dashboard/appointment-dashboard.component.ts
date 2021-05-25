@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {EventService} from '../../services/event.service';
 import {UserService} from '../../services/user.service';
 import {Event} from '../../models/workday/event';
 import {AuthService} from '../../services/auth.service';
+import { User } from 'src/app/models/user/user';
 
 @Component({
   selector: 'app-appointment-dashboard',
@@ -25,6 +26,8 @@ export class AppointmentDashboardComponent implements OnInit {
     'isConfirmed',
     'roomId'
   ];
+  @Input()
+  user:User;
   expandedElement: Event | null;
   dataSource: Event[];
 
@@ -34,12 +37,18 @@ export class AppointmentDashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getUserById(this.authService.getUserIdByToken())
-      .subscribe(user => this.eventService.getEventsOfPsycho(user.id)
-        .subscribe((events: Event[]) => {
-          this.dataSource = events;
-        }));
-
+    this.userService.getUserById(this.user.id)
+      .subscribe(user => {
+        if (this.userService.isPsychologist(this.user)) {
+          this.eventService.getEventsOfPsycho(user.id).subscribe((events: Event[]) => {
+            this.dataSource = events;
+          })
+        } else {
+          this.eventService.getClientEvents(user.id).subscribe((events: Event[]) => {
+            this.dataSource = events;
+          })
+        }
+      })
   }
 
   confirm(element: Event) {

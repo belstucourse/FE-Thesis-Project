@@ -6,12 +6,23 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {FileUploaderService} from '../../services/file-uploader.service';
 import {FileType} from '../../models/file-type.enum';
 import {AuthService} from '../../services/auth.service';
+import {animate, state, style, transition, trigger} from "@angular/animations";
+import {Event} from "../../models/workday/event";
+import {EventService} from "../../services/event.service";
 
 
 @Component({
   selector: 'app-profile-page',
   templateUrl: './profile-page.component.html',
-  styleUrls: ['./profile-page.component.css']
+  styleUrls: ['./profile-page.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+
+  ]
 })
 export class ProfilePageComponent implements OnInit {
   public user: User;
@@ -20,12 +31,22 @@ export class ProfilePageComponent implements OnInit {
   public isPsycho: boolean;
   public isClient: boolean;
 
+  columnsToDisplay: string[] = [
+    'id',
+    'date',
+    'isConfirmed',
+    'roomId'
+  ];
+  expandedElement: Event | null;
+  dataSource: Event[];
+
   fileToUpload: File = null;
 
   constructor(private activatedRoute: ActivatedRoute,
               public userService: UserService,
               private fileUploaderService: FileUploaderService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private eventService : EventService) {
   }
 
   ngOnInit(): void {
@@ -47,6 +68,12 @@ export class ProfilePageComponent implements OnInit {
       password: new FormControl('', [Validators.required]),
       repeatPassword: new FormControl('', [Validators.required]),
     });
+
+    this.userService.getUserById(this.authService.getUserIdByToken())
+      .subscribe(user => this.eventService.getClientEvents(user.id)
+        .subscribe((events: Event[]) => {
+          this.dataSource = events;
+        }));
   }
 
   onSubmit() {

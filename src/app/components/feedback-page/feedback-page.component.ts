@@ -25,8 +25,8 @@ export class FeedbackPageComponent implements OnInit {
 
   onSubmit() {
 
-    this.activatedRoute.paramMap.subscribe((params) => {
-      let roomId = params.get('roomId');
+    this.activatedRoute.queryParams.subscribe((params) => {
+      let roomId = params['roomId'];
       this.eventService.getByRoomId(roomId).subscribe((event: Event) => {
         event.feedback = this.feedbackForm.controls['feedback'].value;
         this.eventService.update(event).subscribe((event) => this.router.navigate(['/catalog']));
