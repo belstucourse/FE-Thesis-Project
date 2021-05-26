@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {PsychoWorkday} from '../../models/workday/psycho-workday';
 import {WorkdayService} from '../../services/workday.service';
 import {AuthService} from '../../services/auth.service';
@@ -18,6 +18,8 @@ export class PsychoWorkdayComponent implements OnInit {
   public selectedStartTime: string;
   public selectedEndTime: string;
   workdayForm: FormGroup;
+  @Input()
+  isActiveProfile:boolean=false;
 
   constructor(private workdayService: WorkdayService,
               private authService: AuthService,

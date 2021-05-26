@@ -22,10 +22,10 @@ import {DatePipe} from '@angular/common';
 })
 export class AppointmentDashboardComponent implements OnInit {
   columnsToDisplay: string[] = [
-    'id',
+    // 'id',
     'date',
     'isConfirmed',
-    'roomId'
+    // 'roomId'
   ];
   @Input()
   user:User;

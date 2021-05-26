@@ -35,11 +35,10 @@ export class AuthService {
         (token: AuthToken) => {
           const decodedToken = this.helper.decodeToken(token.token);
           localStorage.setItem('token', token.token);
-          this.userService.getUserById(this.getUserIdByToken()).subscribe(user=>
-          {
-            this.currentUser.next(user)
+          this.userService.getUserById(this.getUserIdByToken()).subscribe(user => {
+            this.currentUser.next(user);
+            this.router.navigate(['/profile/' + user.id]);
           })
-          this.router.navigate(['/catalog']);
         });
   }
 
