@@ -78,6 +78,7 @@
               <a href="javascript:void(0);" data-target="#edit" data-toggle="pill" class="nav-link"><i class="icon-note"></i> <span class="hidden-xs">Редактирование</span></a>
             </li>
           </ul>
+
           <div class="tab-content p-3">
             <div class="tab-pane active show" id="profile">
               <div class="row">
@@ -88,6 +89,10 @@
 <!--                  <h5 class="mt-2 mb-3"><span class="fa fa-clock-o ion-clock float-right"></span> Recent Activity</h5>-->
                   <app-appointment-dashboard [user]="user"></app-appointment-dashboard>
                 </div>
+              </div>
+              <div class="col-md-12" *ngIf="isPsycho">
+                <h6></h6>
+                <a *ngFor="let tag of psychologist.tags" href="javascript:void(0);" class="badge badge-dark badge-pill">{{tag.name}}</a>
               </div>
               <!--/row-->
             </div>

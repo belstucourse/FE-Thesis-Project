@@ -5,6 +5,7 @@ import {UserService} from '../../services/user.service';
 import {Event} from '../../models/workday/event';
 import {AuthService} from '../../services/auth.service';
 import { User } from 'src/app/models/user/user';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-appointment-dashboard',
@@ -30,7 +31,7 @@ export class AppointmentDashboardComponent implements OnInit {
   user:User;
   expandedElement: Event | null;
   dataSource: Event[];
-
+  public datepipe: DatePipe = new DatePipe('en-US');
   constructor(private eventService: EventService,
               private userService: UserService,
               private authService: AuthService) {
@@ -41,10 +42,16 @@ export class AppointmentDashboardComponent implements OnInit {
       .subscribe(user => {
         if (this.userService.isPsychologist(this.user)) {
           this.eventService.getEventsOfPsycho(user.id).subscribe((events: Event[]) => {
+            events.map((event:Event)=>{
+              this.datepipe.transform(event.date, 'medium')
+            })
             this.dataSource = events;
           })
         } else {
           this.eventService.getClientEvents(user.id).subscribe((events: Event[]) => {
+            events.map((event:Event)=>{
+              this.datepipe.transform(event.date, 'medium')
+            })
             this.dataSource = events;
           })
         }

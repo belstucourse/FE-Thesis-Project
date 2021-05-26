@@ -15,7 +15,7 @@
       <mat-icon>lightbulb</mat-icon>
       О нас
     </button>
-    <button mat-button routerLink="/app-feedback" >
+    <button mat-button routerLink="/app-feedback" *ngIf="isAuthenticated">
       <mat-icon>feedback</mat-icon>
       Оставить отзыв
     </button>

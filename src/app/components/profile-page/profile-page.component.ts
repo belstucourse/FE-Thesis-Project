@@ -6,9 +6,11 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {FileUploaderService} from '../../services/file-uploader.service';
 import {FileType} from '../../models/file-type.enum';
 import {AuthService} from '../../services/auth.service';
-import {animate, state, style, transition, trigger} from "@angular/animations";
-import {Event} from "../../models/workday/event";
-import {EventService} from "../../services/event.service";
+import {animate, state, style, transition, trigger} from '@angular/animations';
+import {Event} from '../../models/workday/event';
+import {EventService} from '../../services/event.service';
+import {Psychologist} from '../../models/user/psychologist';
+import {DatePipe} from '@angular/common';
 
 
 @Component({
@@ -30,6 +32,8 @@ export class ProfilePageComponent implements OnInit {
   public isActiveUserProfile: boolean;
   public isPsycho: boolean;
   public isClient: boolean;
+  public psychologist: Psychologist;
+  public datepipe: DatePipe = new DatePipe('en-US');
 
   columnsToDisplay: string[] = [
     'id',
@@ -46,13 +50,16 @@ export class ProfilePageComponent implements OnInit {
               public userService: UserService,
               private fileUploaderService: FileUploaderService,
               private authService: AuthService,
-              private eventService : EventService) {
+              private eventService: EventService) {
   }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.userService.getUserById(params.get('userId')).subscribe(user => {
         this.user = user;
+        if (this.userService.isPsychologist(user)) {
+          this.psychologist =  user as Psychologist;
+        }
         let currentUserId = this.authService.getUserIdByToken();
         this.isActiveUserProfile = currentUserId === user.id;
         this.isPsycho = this.userService.isPsychologist(user);
