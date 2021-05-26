@@ -4,7 +4,7 @@
        class="mat-elevation-z8">
   <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
     <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-    <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+    <td mat-cell *matCellDef="let element"> {{column === 'date'? this.datepipe.transform(element[column], 'medium') : element[column]}} </td>
   </ng-container>
 
   <ng-container matColumnDef="expandedDetail">
