@@ -87,27 +87,32 @@ import { AdminPsychoCardComponent } from './components/admin-psycho-card/admin-p
 import { AboutComponent } from './components/about/about.component';
 import { UserScheduleComponent } from './components/user-shedule/user-schedule.component';
 import {AmazingTimePickerModule} from 'amazing-time-picker';
+import {AdminGuard} from './guards/admin.guard';
+import {ClientGuard} from './guards/client.guard';
+import {GuestGuard} from './guards/guest.guard';
+import {PsychoGuard} from './guards/psycho.guard';
+import {AppointmentGuardGuard} from './guards/appointment-guard.guard';
 
 
 const routes = [
-  {path: '', component: HomePageComponent},
-  {path: 'catalog', component: CatalogPageComponent},
+  {path: '', component: HomePageComponent, canActivate:[GuestGuard]},
+  {path: 'catalog', component: CatalogPageComponent, canActivate: [ClientGuard]},
   {path: 'signin', component: SignInComponent},
   {path: 'registration-c', component: RegistrationClientPageComponent},
   {path: 'registration-p', component: RegistrationPsychoPageComponent},
-  {path: 'appointment/:psychoId', component: AppointmentPageComponent},
+  {path: 'appointment/:psychoId', component: AppointmentPageComponent, canActivate: [AppointmentGuardGuard]},
   {path: 'complaint', component: ComplaitPageComponent},
-  {path: 'feedback', component: FeedbackPageComponent},
-  {path: 'create-post', component: CreatePostPageComponent},
+  {path: 'feedback', component: FeedbackPageComponent, canActivate: [ClientGuard]},
+  {path: 'create-post', component: CreatePostPageComponent, canActivate: [PsychoGuard]},
   {path: 'blog', component: BlogPageComponent},
   {path: 'chat', component: ChatComponent},
-  {path: 'order', component: OrderComponent},
+  {path: 'order', component: OrderComponent, canActivate: [ClientGuard]},
   {path: 'profile/:userId', component: ProfilePageComponent}, //TODO: provide  /:psychoId
-  {path: 'app-feedback', component: AppFeedbackPageComponent},
-  {path: 'psychoAppointments', component: AppointmentDashboardComponent},
+  {path: 'app-feedback', component: AppFeedbackPageComponent, canActivate: [ClientGuard]},
+  {path: 'psychoAppointments', component: AppointmentDashboardComponent, canActivate: [PsychoGuard]},
   {path: 'post/:postId', component: FullPostComponent},
-  {path: 'admin', component: AdminUserDashboardComponent},
-  {path: 'admin-p', component: AdminPsychoDashboardComponent},
+  {path: 'admin', component: AdminUserDashboardComponent, canActivate: [AdminGuard]},
+  {path: 'admin-p', component: AdminPsychoDashboardComponent, canActivate: [AdminGuard]},
   {path: 'about', component: AboutComponent},
   {path: 'workday', component: PsychoWorkdayComponent}
 ];
@@ -212,7 +217,11 @@ const routes = [
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
       multi: true,
-    }
+    },
+    AdminGuard,
+    ClientGuard,
+    GuestGuard,
+    PsychoGuard
   ],
   bootstrap: [AppComponent]
 })

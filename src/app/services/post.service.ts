@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Post} from '../models/post/post';
 import {PagePost} from '../models/pagePost';
+import {Feedback} from '../models/feedback';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,21 @@ export class PostService {
 
   public deletePost(postId: string): void {
     this.httpClient.delete('/api/posts/' + postId);
+  }
+
+  public saveApplicationFeedback(feedback: Feedback): Observable<Feedback> {
+    return this.httpClient.post<Feedback>('/api/feedbacks', feedback);
+  }
+
+  public deleteApplicationFeedback(id: string): void {
+    this.httpClient.delete('/api/feedbacks/' + id);
+  }
+
+  public getAllApplicationFeedbacks(): Observable<Feedback[]> {
+    return this.httpClient.get<Feedback[]>('api/feedbacks/');
+  }
+
+  public getApplicationFeedbackById(id: string): Observable<Feedback> {
+    return this.httpClient.get<Feedback>('api/feedbacks/' + id);
   }
 }

@@ -6,10 +6,11 @@
          alt="A woman is sitting on the floor and working on a laptop (vector illustration)" />
   </header>
   <main mv-app="feedbackForm">
-    <form>
+    <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
       <textarea property="comment"
                 cols="30" rows="10"
-                placeholder="Поделитесь впечатлениями о нашем приложении..."></textarea>
+                placeholder="Поделитесь впечатлениями о нашем приложении..."
+                formControlName="feedback"></textarea>
         <button mat-raised-button color="primary">
           Отправить отзыв
         </button>
