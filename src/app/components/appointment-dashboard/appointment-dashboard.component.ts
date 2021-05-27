@@ -24,8 +24,9 @@ export class AppointmentDashboardComponent implements OnInit {
   columnsToDisplay: string[] = [
     // 'id',
     'date',
-    'isConfirmed',
-    // 'roomId'
+    //'isConfirmed',
+    'psychologistName',
+    'clientName'
   ];
   @Input()
   user:User;
