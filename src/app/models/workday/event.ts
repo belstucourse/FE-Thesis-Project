@@ -8,4 +8,6 @@ export interface Event {
   reasonForVisit: string;
   roomId?: String;
   feedback?:string;
+  psychologistName?:string;
+  clientName?:string;
 }
