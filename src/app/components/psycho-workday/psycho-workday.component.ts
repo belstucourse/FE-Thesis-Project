@@ -1,17 +1,22 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {PsychoWorkday} from '../../models/workday/psycho-workday';
 import {WorkdayService} from '../../services/workday.service';
 import {AuthService} from '../../services/auth.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AmazingTimePickerService} from 'amazing-time-picker';
 import {UserService} from '../../services/user.service';
+import {MatTable} from "@angular/material/table";
 
 @Component({
   selector: 'app-psycho-workday',
   templateUrl: './psycho-workday.component.html',
   styleUrls: ['./psycho-workday.component.css']
 })
+
 export class PsychoWorkdayComponent implements OnInit {
+
+  @ViewChild(MatTable) table: MatTable<any>;
+
 
   public displayedColumns = ['date', 'start', 'end'];
   public dataSource: PsychoWorkday[];
@@ -57,14 +62,14 @@ export class PsychoWorkdayComponent implements OnInit {
     let startMinutesString = this.selectedStartTime.charAt(3) + this.selectedStartTime.charAt(4);
     let startHours : number = +startHoursString
     let startMinutes : number = +startMinutesString
-    let dateStart = new Date(date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate(), startHours, startMinutes)
+    let dateStart = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), startHours + 3, startMinutes)
 
 
     let endHoursString = this.selectedEndTime.charAt(0) + this.selectedEndTime.charAt(1);
     let endMinutesString = this.selectedEndTime.charAt(3) + this.selectedEndTime.charAt(4);
     let endHours : number = +endHoursString
     let endMinutes : number = +endMinutesString
-    let dateEnd = new Date(date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate(), endHours, endMinutes)
+    let dateEnd = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), endHours + 3, endMinutes)
 
     let workday: PsychoWorkday = {
       psychologistId: this.authService.getUserIdByToken(),
@@ -72,8 +77,10 @@ export class PsychoWorkdayComponent implements OnInit {
       startDateTime: dateStart,
       endDateTime: dateEnd,
     };
-    this.workdayService.saveTimeslot(workday).subscribe((workday:PsychoWorkday)=>{
 
+    this.workdayService.saveTimeslot(workday).subscribe((workdayRes:PsychoWorkday)=>{
+        this.dataSource.push(workdayRes)
+      this.table.renderRows();
     })
   }
 
