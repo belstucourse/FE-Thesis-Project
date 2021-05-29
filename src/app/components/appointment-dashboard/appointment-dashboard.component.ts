@@ -6,6 +6,8 @@ import {Event} from '../../models/workday/event';
 import {AuthService} from '../../services/auth.service';
 import {User} from 'src/app/models/user/user';
 import {DatePipe} from '@angular/common';
+import {AppointmentNotesService} from '../../services/appointment-notes.service';
+import {DetailedEvents} from '../../models/workday/detailed-events';
 
 @Component({
   selector: 'app-appointment-dashboard',
@@ -35,29 +37,24 @@ export class AppointmentDashboardComponent implements OnInit {
   public datepipe: DatePipe = new DatePipe('en-US');
 
   constructor(private eventService: EventService,
-              private userService: UserService,
-              private authService: AuthService) {
+              protected userService: UserService,
+              private authService: AuthService,
+              private appointmentNotesService: AppointmentNotesService) {
   }
 
   ngOnInit(): void {
     this.userService.getUserById(this.user.id)
       .subscribe(user => {
         if (this.userService.isPsychologist(this.user)) {
-          this.eventService.getEventsOfPsycho(user.id).subscribe((events: Event[]) => {
-            events.map((event: Event) => {
-              this.datepipe.transform(event.date, 'medium')
-            })
+          this.eventService.getDetailedEventsOfPsycho(user.id).subscribe((events: DetailedEvents[]) => {
             this.dataSource = events;
-          })
+          });
         } else {
-          this.eventService.getClientEvents(user.id).subscribe((events: Event[]) => {
-            events.map((event: Event) => {
-              this.datepipe.transform(event.date, 'medium')
-            })
+          this.eventService.getClientDetailedEvents(user.id).subscribe((events: DetailedEvents[]) => {
             this.dataSource = events;
-          })
+          });
         }
-      })
+      });
   }
 
   reject(element: Event) {

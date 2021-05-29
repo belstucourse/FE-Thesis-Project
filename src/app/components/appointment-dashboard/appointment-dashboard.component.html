@@ -4,7 +4,8 @@
        class="mat-elevation-z8">
   <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
     <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-    <td mat-cell *matCellDef="let element"> {{column === 'date'? this.datepipe.transform(element[column], 'medium') : element[column]}} </td>
+    <td mat-cell
+        *matCellDef="let element"> {{column === 'date' ? this.datepipe.transform(element[column], 'medium') : element[column]}} </td>
   </ng-container>
 
   <ng-container matColumnDef="expandedDetail">
@@ -12,15 +13,29 @@
       <div class="example-element-detail"
            [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
         <div class="example-element-diagram" *ngIf="userService.isPsychologist(user)">
-          <button mat-raised-button *ngIf="element.isConfirmed" (click)="reject(element)">Отвергнуть</button>
+          <button mat-raised-button *ngIf="element.isConfirmed && !element.isEnded" (click)="reject(element)">Отвергнуть</button>
         </div>
         <div class="example-element-description">
-          Причина посещения:
-          {{element.reasonForVisit}}
+          <p>Причина посещения:
+            {{element?.reasonForVisit}}</p>
+        </div>
+
+        <div *ngIf="userService.isClient(user)" class="example-element-description">
+          <p>Рекомендации к лечению:
+            {{element.prescription !==null ? element.prescription.recommendations : "Рекомендации не опубликованы"}}</p>
+        </div>
+        <div *ngIf="userService.isPsychologist(user)" class="example-element-description">
+          <p>Беспокоющие симптомы, которые были выявлены при встрече:
+            {{element.psychoEventNotes !==null ? element.psychoEventNotes.symptoms : "Симптомы не было отмечены"}}</p>
+        </div>
+        <div *ngIf="userService.isPsychologist(user)" class="example-element-description">
+          <p>Заметки:
+            {{element.psychoEventNotes !==null ? element.psychoEventNotes.specialNotes : "Заметок не было оставлено"}}</p>
         </div>
       </div>
-      <div class="example-element-description" *ngIf="element.isConfirmed">
-        <a href="http://localhost:8001?roomId={{element.roomId}}">Сслыка на видеоконференцию</a>
+      <div class="example-element-description" *ngIf="element.isConfirmed && !element.isEnded">
+        <a *ngIf="element.isConfirmed && !element.isEnded" href="http://localhost:8001?roomId={{element.roomId}}">Сслыка
+          на видеоконференцию</a>
       </div>
     </td>
   </ng-container>
