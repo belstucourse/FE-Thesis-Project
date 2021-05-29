@@ -1,11 +1,10 @@
 import {Injectable, Injector} from '@angular/core';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {Observable} from 'rxjs';
 import {User} from '../models/user/user';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Client} from '../models/user/client';
 import {Psychologist} from '../models/user/psychologist';
 import {PagePsychologist} from '../models/pagePsychologist';
-import {AuthService} from './auth.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
 
 @Injectable({
@@ -49,11 +48,19 @@ export class UserService {
     return this.httpClient.get<PagePsychologist>('api/users/doctors', {params});
   }
 
-  public getAllUsers(): Observable<User[]>{
-    return this.httpClient.get<User[]>('api/users/all')
+  public getAllUsers(): Observable<User[]> {
+    return this.httpClient.get<User[]>('api/users/all');
   }
 
-  public getAllPsychos(): Observable<Psychologist[]>{
-    return this.httpClient.get<Psychologist[]>('api/users/all-psycho')
+  public getAllPsychos(): Observable<Psychologist[]> {
+    return this.httpClient.get<Psychologist[]>('api/users/all-psycho');
+  }
+
+  public getDoctorsByTagNamesAndWorkday(tagNames: string[], startDate: Date, endDate: Date): Observable<PagePsychologist> {
+    let params = new HttpParams();
+    tagNames.forEach((name: string) => params = params.append('tagNames', name));
+    params = params.append('startDate', startDate.toISOString());
+    params = params.append('endDate', endDate.toISOString());
+    return this.httpClient.get<PagePsychologist>('api/users/doctors/search', {params});
   }
 }

@@ -74,28 +74,30 @@ import {ProfilePageComponent} from './components/profile-page/profile-page.compo
 import {AppFeedbackPageComponent} from './components/app-feedback-page/app-feedback-page.component';
 import {AuthInterceptor} from './services/auth-interceptor';
 import {JwtInterceptor} from './services/jwt-interceptor';
-import { AppointmentDashboardComponent } from './components/appointment-dashboard/appointment-dashboard.component';
-import {AdminUserDashboardComponent} from "./components/admin-user-dashboard/admin-user-dashboard.component";
-import {AdminUserCardComponent} from "./components/admin-user-card/admin-user-card.component";
-import { FullPostComponent } from './components/full-post/full-post.component';
-import { PsychoWorkdayComponent } from './components/psycho-workday/psycho-workday.component';
-import { BidiModule } from '@angular/cdk/bidi';
-import { PlatformModule } from '@angular/cdk/platform';
-import { ObserversModule } from '@angular/cdk/observers';
-import { AdminPsychoDashboardComponent } from './components/admin-psycho-dashboard/admin-psycho-dashboard.component';
-import { AdminPsychoCardComponent } from './components/admin-psycho-card/admin-psycho-card.component';
-import { AboutComponent } from './components/about/about.component';
-import { UserScheduleComponent } from './components/user-shedule/user-schedule.component';
+import {AppointmentDashboardComponent} from './components/appointment-dashboard/appointment-dashboard.component';
+import {AdminUserDashboardComponent} from './components/admin-user-dashboard/admin-user-dashboard.component';
+import {AdminUserCardComponent} from './components/admin-user-card/admin-user-card.component';
+import {FullPostComponent} from './components/full-post/full-post.component';
+import {PsychoWorkdayComponent} from './components/psycho-workday/psycho-workday.component';
+import {BidiModule} from '@angular/cdk/bidi';
+import {PlatformModule} from '@angular/cdk/platform';
+import {ObserversModule} from '@angular/cdk/observers';
+import {AdminPsychoDashboardComponent} from './components/admin-psycho-dashboard/admin-psycho-dashboard.component';
+import {AdminPsychoCardComponent} from './components/admin-psycho-card/admin-psycho-card.component';
+import {AboutComponent} from './components/about/about.component';
+import {UserScheduleComponent} from './components/user-shedule/user-schedule.component';
 import {AmazingTimePickerModule} from 'amazing-time-picker';
 import {AdminGuard} from './guards/admin.guard';
 import {ClientGuard} from './guards/client.guard';
 import {GuestGuard} from './guards/guest.guard';
 import {PsychoGuard} from './guards/psycho.guard';
 import {AppointmentGuardGuard} from './guards/appointment-guard.guard';
+import {ClientRepeatedAppointmentRegistrationComponent} from './components/client-repeated-appointment-registration/client-repeated-appointment-registration.component';
+import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule} from '@angular/material-moment-adapter';
 
 
 const routes = [
-  {path: '', component: HomePageComponent, canActivate:[GuestGuard]},
+  {path: '', component: HomePageComponent, canActivate: [GuestGuard]},
   {path: 'catalog', component: CatalogPageComponent, canActivate: [ClientGuard]},
   {path: 'signin', component: SignInComponent},
   {path: 'registration-c', component: RegistrationClientPageComponent},
@@ -147,7 +149,8 @@ const routes = [
     AdminPsychoDashboardComponent,
     AdminPsychoCardComponent,
     AboutComponent,
-    UserScheduleComponent
+    UserScheduleComponent,
+    ClientRepeatedAppointmentRegistrationComponent
   ],
   imports: [
     BidiModule,
@@ -221,9 +224,13 @@ const routes = [
     AdminGuard,
     ClientGuard,
     GuestGuard,
-    PsychoGuard
+    PsychoGuard,
+    {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}}
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [
+    MatMomentDateModule,
+  ]
 })
 export class AppModule {
 }

@@ -4,11 +4,25 @@
   <mat-chip
     class="example-box"
     *ngFor="let psychologistTag of psychologistTags" [class.mat-chip-selected]="psychologistTag.selected"
-    (click)="changeSelected(psychologistTag)">
+    (click)="datePickerForm.valid ? searchPsychos(psychologistTag) : changeSelected(psychologistTag)">
     {{psychologistTag.name}}
   </mat-chip>
+
 </mat-chip-list>
+<form [formGroup]="datePickerForm">
+  <h3 style="text-align: center">Выберите дату и часы посещения</h3>
+  <mat-form-field appearance="fill" style="width: 100%">
+    <mat-label>Дата посещения</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <input type="time" (click)="openStart()" value="{{selectedStartTime}}" style="width: 10%">
+  <input type="time" (click)="openEnd()" value="{{selectedEndTime}}" style="width: 10%; margin-left: 1%">
+  <button mat-raised-button color="primary" (click)="searchPsychos(null)">Найти</button>
+  <button mat-raised-button color="primary" (click)="reset()">Сброс</button>
+</form>
 <div class="row">
-    <app-psycho-card style="padding-right: 20px;" *ngFor="let psychologist of psychologists"
-    [psychologist]="psychologist"></app-psycho-card>
+  <app-psycho-card style="padding-right: 20px;" *ngFor="let psychologist of psychologists"
+                   [psychologist]="psychologist"></app-psycho-card>
 </div>

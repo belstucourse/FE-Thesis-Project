@@ -1,12 +1,31 @@
 <body>
-<div class="container">
-  <form id="feedback_form" class="form" [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+<div class="container" *ngIf="isClient">
+  <form class="form" [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
     <div class="input-field">
-      <label for="feedback">Ваш отзыв о специалисте</label>
-      <textarea id="feedback" name="feedback" form="feedback_form" formControlName="feedback"></textarea>
+      <label>Ваш отзыв о специалисте</label>
+      <textarea name="feedback" formControlName="feedback"></textarea>
     </div>
     <div class="action">
-      <button id="btn" class="btn">Отправить</button>
+      <button class="btn" class="btn">Отправить</button>
+    </div>
+  </form>
+</div>
+<div *ngIf="isPsycho" class="container">
+  <form class="form" [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+    <div class="input-field">
+      <label>Симптомы</label>
+      <textarea name="symptoms" formControlName="symptoms"></textarea>
+    </div>
+    <div class="input-field">
+      <label>Рекомендации для пациента</label>
+      <textarea name="recommendations" formControlName="recommendations"></textarea>
+    </div>
+    <div class="input-field">
+      <label>Специальные заметки</label>
+      <textarea name="specialNotes" formControlName="specialNotes"></textarea>
+    </div>
+    <div class="action">
+      <button class="btn" class="btn">Отправить</button>
     </div>
   </form>
 </div>
