@@ -20,6 +20,7 @@ export class FeedbackPageComponent implements OnInit {
   public user: User;
   public isClient: boolean;
   public isPsycho: boolean;
+  checked: boolean = false;
 
   constructor(private eventService: EventService,
               private activatedRoute: ActivatedRoute,

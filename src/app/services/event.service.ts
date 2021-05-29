@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Event} from '../models/workday/event';
+import {DetailedEvents} from '../models/workday/detailed-events';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,14 @@ export class EventService {
 
   public getEventsOfPsycho(psychoId: string): Observable<Event[]> {
     return this.httpClient.get<Event[]>('/api/event/' + psychoId);
+  }
+
+  public getClientDetailedEvents(clientId: string): Observable<DetailedEvents[]> {
+    return this.httpClient.get<DetailedEvents[]>('api/event/' + clientId + '/client/details');
+  }
+
+  public getDetailedEventsOfPsycho(psychoId: string): Observable<DetailedEvents[]> {
+    return this.httpClient.get<DetailedEvents[]>('/api/event/' + psychoId + '/details');
   }
 
   public update(event: Event): Observable<Event> {

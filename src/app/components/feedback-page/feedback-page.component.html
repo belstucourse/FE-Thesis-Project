@@ -13,16 +13,20 @@
 <div *ngIf="isPsycho" class="container">
   <form class="form" [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
     <div class="input-field">
-      <label>Симптомы</label>
-      <textarea name="symptoms" formControlName="symptoms"></textarea>
-    </div>
-    <div class="input-field">
       <label>Рекомендации для пациента</label>
       <textarea name="recommendations" formControlName="recommendations"></textarea>
     </div>
     <div class="input-field">
+      <label>Симптомы</label>
+      <textarea name="symptoms" formControlName="symptoms"></textarea>
+    </div>
+    <div class="input-field">
       <label>Специальные заметки</label>
       <textarea name="specialNotes" formControlName="specialNotes"></textarea>
+    </div>
+    <div class="input-field">
+      <label>Повторить прием для данного пациента?</label>
+      <mat-checkbox class="example-margin" formControlName="repeat">Повторить</mat-checkbox>
     </div>
     <div class="action">
       <button class="btn" class="btn">Отправить</button>

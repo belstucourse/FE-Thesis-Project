@@ -7,7 +7,8 @@ export interface Event {
   isConfirmed?: boolean;
   reasonForVisit: string;
   roomId?: String;
-  feedback?:string;
-  psychologistName?:string;
-  clientName?:string;
+  feedback?: string;
+  psychologistName?: string;
+  clientName?: string;
+  isRepeated?: boolean;
 }
