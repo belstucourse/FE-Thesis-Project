@@ -5,7 +5,8 @@ import {AuthService} from '../../services/auth.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AmazingTimePickerService} from 'amazing-time-picker';
 import {UserService} from '../../services/user.service';
-import {MatTable} from "@angular/material/table";
+import {MatTable} from '@angular/material/table';
+import {DateTimeCalculator} from '../../services/date-time-calculator.service';
 
 @Component({
   selector: 'app-psycho-workday',
@@ -24,12 +25,13 @@ export class PsychoWorkdayComponent implements OnInit {
   public selectedEndTime: string;
   workdayForm: FormGroup;
   @Input()
-  isActiveProfile:boolean=false;
+  isActiveProfile: boolean = false;
 
   constructor(private workdayService: WorkdayService,
               private authService: AuthService,
               private atp: AmazingTimePickerService,
-              private userService: UserService) {
+              private userService: UserService,
+              private dateTimeCalculator: DateTimeCalculator) {
     this.workdayForm = new FormGroup({
       date: new FormControl('', [Validators.required])
     });
@@ -58,18 +60,9 @@ export class PsychoWorkdayComponent implements OnInit {
 
   addWorkday() {
     let date = this.workdayForm.controls['date'].value;
-    let startHoursString = this.selectedStartTime.charAt(0) + this.selectedStartTime.charAt(1);
-    let startMinutesString = this.selectedStartTime.charAt(3) + this.selectedStartTime.charAt(4);
-    let startHours : number = +startHoursString
-    let startMinutes : number = +startMinutesString
-    let dateStart = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), startHours + 3, startMinutes)
+    let dateStart = this.dateTimeCalculator.calculate(date, this.selectedStartTime);
+    let dateEnd = this.dateTimeCalculator.calculate(date, this.selectedEndTime);
 
-
-    let endHoursString = this.selectedEndTime.charAt(0) + this.selectedEndTime.charAt(1);
-    let endMinutesString = this.selectedEndTime.charAt(3) + this.selectedEndTime.charAt(4);
-    let endHours : number = +endHoursString
-    let endMinutes : number = +endMinutesString
-    let dateEnd = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), endHours + 3, endMinutes)
 
     let workday: PsychoWorkday = {
       psychologistId: this.authService.getUserIdByToken(),
@@ -78,10 +71,10 @@ export class PsychoWorkdayComponent implements OnInit {
       endDateTime: dateEnd,
     };
 
-    this.workdayService.saveTimeslot(workday).subscribe((workdayRes:PsychoWorkday)=>{
-        this.dataSource.push(workdayRes)
+    this.workdayService.saveTimeslot(workday).subscribe((workdayRes: PsychoWorkday) => {
+      this.dataSource.push(workdayRes);
       this.table.renderRows();
-    })
+    });
   }
 
   openStart() {

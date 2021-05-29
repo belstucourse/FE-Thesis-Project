@@ -4,7 +4,7 @@ import {EventService} from '../../services/event.service';
 import {UserService} from '../../services/user.service';
 import {Event} from '../../models/workday/event';
 import {AuthService} from '../../services/auth.service';
-import { User } from 'src/app/models/user/user';
+import {User} from 'src/app/models/user/user';
 import {DatePipe} from '@angular/common';
 
 @Component({
@@ -29,10 +29,11 @@ export class AppointmentDashboardComponent implements OnInit {
     'clientName'
   ];
   @Input()
-  user:User;
+  user: User;
   expandedElement: Event | null;
   dataSource: Event[];
   public datepipe: DatePipe = new DatePipe('en-US');
+
   constructor(private eventService: EventService,
               private userService: UserService,
               private authService: AuthService) {
@@ -43,29 +44,20 @@ export class AppointmentDashboardComponent implements OnInit {
       .subscribe(user => {
         if (this.userService.isPsychologist(this.user)) {
           this.eventService.getEventsOfPsycho(user.id).subscribe((events: Event[]) => {
-            events.map((event:Event)=>{
+            events.map((event: Event) => {
               this.datepipe.transform(event.date, 'medium')
             })
             this.dataSource = events;
           })
         } else {
           this.eventService.getClientEvents(user.id).subscribe((events: Event[]) => {
-            events.map((event:Event)=>{
+            events.map((event: Event) => {
               this.datepipe.transform(event.date, 'medium')
             })
             this.dataSource = events;
           })
         }
       })
-  }
-
-  confirm(element: Event) {
-    element.isConfirmed = true;
-    this.eventService.saveOrder(element).subscribe((event: Event) => {
-      for (let item of this.dataSource) {
-        item.isConfirmed = item.id === event.id ? event.isConfirmed : item.isConfirmed;
-      }
-    });
   }
 
   reject(element: Event) {
