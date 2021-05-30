@@ -45,6 +45,7 @@ export class FeedbackPageComponent implements OnInit {
             symptoms: new FormControl('', [Validators.required]),
             recommendations: new FormControl('', [Validators.required]),
             specialNotes: new FormControl('', [Validators.required]),
+            repeat: new FormControl('', [Validators.required]),
           });
         }
       });
@@ -78,7 +79,15 @@ export class FeedbackPageComponent implements OnInit {
     };
     this.appointmentNotesService.savePrescription(prescription).subscribe((prescription) => {
       this.appointmentNotesService.savePsychoNotes(psychoEventNotes).subscribe(psychoEventNotes => {
-        this.router.navigate(['/profile/' + this.user.id]);
+        if (this.feedbackForm.controls['repeat'].value === true) {
+          this.router.navigate(['/appointment/' + this.user.id], {
+            queryParams: {
+              'clientId': event.clientId
+            }
+          });
+        } else {
+          this.router.navigate(['/profile/' + this.user.id]);
+        }
       });
     });
   }

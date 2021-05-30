@@ -25,7 +25,7 @@
 <!--      </p>-->
     </div>
     <div class="card-action">
-      <a routerLink="/appointment/{{psychologist.id}}">Запись</a>
+      <a routerLink="/appointment/{{psychologist.id}}" *ngIf="!isCurrent">Запись</a>
       <a style="float: right" routerLink="/profile/{{psychologist.id}}">Профиль</a>
     </div>
   </div>

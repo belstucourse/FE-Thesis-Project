@@ -28,6 +28,7 @@ import {DatePipe} from '@angular/common';
 })
 export class ProfilePageComponent implements OnInit {
   public user: User;
+  public userId:string;
   editForm: FormGroup;
   public isActiveUserProfile: boolean;
   public isPsycho: boolean;
@@ -55,6 +56,7 @@ export class ProfilePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((params) => {
+      this.userId = params.get('userId');
       this.userService.getUserById(params.get('userId')).subscribe(user => {
         this.user = user;
         if (this.userService.isPsychologist(user)) {

@@ -2,11 +2,11 @@
   <div class="appointment-user-wrapper">
     <div class="user-avatar">
 <!--      <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80">-->
-      <img src="{{psychologist.avatarUrl}}}">
+      <img src="{{psychologist?.avatarUrl}}">
     </div>
 
     <div class="appointment-user">
-      <span class="username">Dr {{psychologist.firstName}} {{psychologist.lastName}}</span>
+      <span class="username">Dr {{psychologist?.firstName}} {{psychologist?.lastName}}</span>
       <span class="specialization">General practitioner</span>
     </div>
 
@@ -18,7 +18,7 @@
   </div>
   <div class="appointment-calendar">
     <div class="current-week">
-      <span><i class="fa fa-calendar"></i> 26.05 - 03.06 </span>
+      <span><i class="fa fa-calendar"></i> {{datepipe.transform(currentDate, 'dd.MM')}} - {{datepipe.transform(endDate, 'dd.MM')}}</span>
     </div>
 
     <div class="calendar-wrapper">

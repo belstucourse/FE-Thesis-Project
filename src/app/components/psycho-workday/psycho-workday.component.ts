@@ -7,6 +7,7 @@ import {AmazingTimePickerService} from 'amazing-time-picker';
 import {UserService} from '../../services/user.service';
 import {MatTable} from '@angular/material/table';
 import {DateTimeCalculator} from '../../services/date-time-calculator.service';
+import {User} from '../../models/user/user';
 
 @Component({
   selector: 'app-psycho-workday',
@@ -26,6 +27,8 @@ export class PsychoWorkdayComponent implements OnInit {
   workdayForm: FormGroup;
   @Input()
   isActiveProfile: boolean = false;
+  @Input()
+  public inputUserId: string;
 
   constructor(private workdayService: WorkdayService,
               private authService: AuthService,
@@ -33,7 +36,8 @@ export class PsychoWorkdayComponent implements OnInit {
               private userService: UserService,
               private dateTimeCalculator: DateTimeCalculator) {
     this.workdayForm = new FormGroup({
-      date: new FormControl('', [Validators.required])
+      date: new FormControl('', [Validators.required]),
+      generateAllWeek: new FormControl('', [Validators.required])
     });
   }
 
@@ -48,7 +52,7 @@ export class PsychoWorkdayComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.workdayService.getPsychoWorkdaysOnWeek(this.authService.getUserIdByToken()).subscribe((timeslots: PsychoWorkday[]) => {
+    this.workdayService.getPsychoWorkdaysOnWeek(this.inputUserId).subscribe((timeslots: PsychoWorkday[]) => {
       this.dataSource = timeslots;
     });
 
@@ -60,6 +64,7 @@ export class PsychoWorkdayComponent implements OnInit {
 
   addWorkday() {
     let date = this.workdayForm.controls['date'].value;
+    let generateAllWeek = this.workdayForm.controls['generateAllWeek'].value;
     let dateStart = this.dateTimeCalculator.calculate(date, this.selectedStartTime);
     let dateEnd = this.dateTimeCalculator.calculate(date, this.selectedEndTime);
 
@@ -70,11 +75,29 @@ export class PsychoWorkdayComponent implements OnInit {
       startDateTime: dateStart,
       endDateTime: dateEnd,
     };
-
-    this.workdayService.saveTimeslot(workday).subscribe((workdayRes: PsychoWorkday) => {
-      this.dataSource.push(workdayRes);
-      this.table.renderRows();
-    });
+    if (generateAllWeek === true) {
+      this.workdayService.saveTimeslotsOnWeek(workday).subscribe((workdayRes: PsychoWorkday[]) => {
+        for (const workdayRe of workdayRes) {
+          let foundIndex = this.dataSource.findIndex(x => x.id == workdayRe.id);
+          if (foundIndex !== -1) {
+            this.dataSource[foundIndex] = workdayRe;
+          } else {
+            this.dataSource.push(workdayRe);
+          }
+        }
+        this.table.renderRows();
+      });
+    } else {
+      this.workdayService.saveTimeslot(workday).subscribe((workdayRes: PsychoWorkday) => {
+        let foundIndex = this.dataSource.findIndex(x => x.id == workdayRes.id);
+        if (foundIndex !== -1) {
+          this.dataSource[foundIndex] = workdayRes;
+        } else {
+          this.dataSource.push(workdayRes);
+        }
+        this.table.renderRows();
+      });
+    }
   }
 
   openStart() {

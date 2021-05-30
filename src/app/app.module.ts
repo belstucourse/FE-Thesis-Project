@@ -98,7 +98,7 @@ import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule} from '@angular/mat
 
 const routes = [
   {path: '', component: HomePageComponent, canActivate: [GuestGuard]},
-  {path: 'catalog', component: CatalogPageComponent, canActivate: [ClientGuard]},
+  {path: 'catalog', component: CatalogPageComponent},
   {path: 'signin', component: SignInComponent},
   {path: 'registration-c', component: RegistrationClientPageComponent},
   {path: 'registration-p', component: RegistrationPsychoPageComponent},
