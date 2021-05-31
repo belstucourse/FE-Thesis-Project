@@ -98,7 +98,7 @@
                 <!--/row-->
               </div>
               <div class="tab-pane" id="messages">
-                <app-psycho-workday [inputUserId]="userId"></app-psycho-workday>
+                <app-psycho-workday [isActiveProfile]="isActiveUserProfile" [inputUserId]="userId"></app-psycho-workday>
                 <!--              <app-psycho-workday></app-psycho-workday>-->
               </div>
               <div class="tab-pane" id="edit" *ngIf="isActiveUserProfile">

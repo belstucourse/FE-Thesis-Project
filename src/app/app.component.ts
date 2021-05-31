@@ -39,7 +39,7 @@ export class AppComponent {
                         this.user = user;
                         this.isClient = this.userService.isClient(this.user);
                         this.isPsyhco = this.userService.isPsychologist(this.user);
-                        this.isAdmin = !this.isClient && !this.isPsyhco;
+                        this.isAdmin = this.userService.isAdmin(this.user);
                         this.isAuthenticated = true;
                     });
                 }
