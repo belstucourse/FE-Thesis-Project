@@ -23,8 +23,8 @@ export class PostService {
     return this.httpClient.get<PagePost>('api/posts/psycho/' + psychoId + '?page=' + page + '&size=20&sort=id,DESC');
   }
 
-  public getAllPosts(page: number): Observable<PagePost> {
-    return this.httpClient.get<PagePost>('api/posts?page=' + page + '&size=20&sort=id,DESC');
+  public getAllPosts(page: number, sortType: string): Observable<PagePost> {
+    return this.httpClient.get<PagePost>('api/posts?page=' + page + '&size=20&sort=' + sortType + ',DESC');
   }
 
   public savePost(post: Post): Observable<Post> {
