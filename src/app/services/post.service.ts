@@ -4,6 +4,8 @@ import {Observable} from 'rxjs';
 import {Post} from '../models/post/post';
 import {PagePost} from '../models/pagePost';
 import {Feedback} from '../models/feedback';
+import {Mark} from '../models/post/mark';
+import {PostMarkResponse} from '../models/post/post-mark-response';
 
 @Injectable({
   providedIn: 'root'
@@ -51,5 +53,13 @@ export class PostService {
 
   public getApplicationFeedbackById(id: string): Observable<Feedback> {
     return this.httpClient.get<Feedback>('api/feedbacks/' + id);
+  }
+
+  public getAllMarksOfPost(postId: string): Observable<PostMarkResponse> {
+    return this.httpClient.get<PostMarkResponse>('api/posts/marks/' + postId);
+  }
+
+  public saveMark(mark: Mark): Observable<Mark> {
+    return this.httpClient.post<Mark>('/api/posts/marks/', mark);
   }
 }
