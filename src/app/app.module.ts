@@ -104,7 +104,7 @@ const routes = [
   {path: 'registration-p', component: RegistrationPsychoPageComponent},
   {path: 'appointment/:psychoId', component: AppointmentPageComponent, canActivate: [AppointmentGuardGuard]},
   {path: 'complaint', component: ComplaitPageComponent},
-  {path: 'feedback', component: FeedbackPageComponent, canActivate: [ClientGuard]},
+  {path: 'feedback', component: FeedbackPageComponent},
   {path: 'create-post', component: CreatePostPageComponent, canActivate: [PsychoGuard]},
   {path: 'blog', component: BlogPageComponent},
   {path: 'chat', component: ChatComponent},

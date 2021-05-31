@@ -18,9 +18,10 @@ export class AdminGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     let userId = this.authService.getUserIdByToken();
-    if (userId !== '') {
-      return this.userService.getUserById(userId).pipe(map<User, boolean>(user => !this.userService.isClient(user) || !this.userService.isPsychologist(user)));
-    }
-  }
 
+    let observable = this.userService.getUserById(userId).pipe(map<User, boolean>(user => this.userService.isAdmin(user)));
+    observable.subscribe(value => console.log(console.log(value)));
+    return this.userService.getUserById(userId).pipe(map<User, boolean>(user => this.userService.isAdmin(user)));
+
+  }
 }

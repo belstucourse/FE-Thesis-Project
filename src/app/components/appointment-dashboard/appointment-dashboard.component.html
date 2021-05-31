@@ -25,7 +25,7 @@
             {{element.prescription !==null ? element.prescription.recommendations : "Рекомендации не опубликованы"}}</p>
         </div>
         <div *ngIf="userService.isPsychologist(user)" class="example-element-description">
-          <p>Беспокоющие симптомы, которые были выявлены при встрече:
+          <p>Беспокоящие симптомы, которые были выявлены при встрече:
             {{element.psychoEventNotes !==null ? element.psychoEventNotes.symptoms : "Симптомы не было отмечены"}}</p>
         </div>
         <div *ngIf="userService.isPsychologist(user)" class="example-element-description">
@@ -34,7 +34,7 @@
         </div>
       </div>
       <div class="example-element-description" *ngIf="element.isConfirmed && !element.isEnded">
-        <a *ngIf="element.isConfirmed && !element.isEnded" href="http://localhost:8001?roomId={{element.roomId}}">Сслыка
+        <a *ngIf="element.isConfirmed && !element.isEnded" href="https://bstu-thesis-project.herokuapp.com/?roomId={{element.roomId}}">Сслыка
           на видеоконференцию</a>
       </div>
     </td>
