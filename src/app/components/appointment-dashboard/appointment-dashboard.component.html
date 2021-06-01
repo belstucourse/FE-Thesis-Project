@@ -13,7 +13,7 @@
       <div class="example-element-detail"
            [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
         <div class="example-element-diagram" *ngIf="userService.isPsychologist(user)">
-          <button mat-raised-button *ngIf="element.isConfirmed && !element.isEnded" (click)="reject(element)">Отвергнуть</button>
+          <button mat-raised-button *ngIf="false" (click)="reject(element)">Отвергнуть</button>
         </div>
         <div class="example-element-description">
           <p>Причина посещения:
@@ -25,7 +25,7 @@
             {{element.prescription !==null ? element.prescription.recommendations : "Рекомендации не опубликованы"}}</p>
         </div>
         <div *ngIf="userService.isPsychologist(user)" class="example-element-description">
-          <p>Беспокоящие симптомы, которые были выявлены при встрече:
+          <p>Беспокоящие симптомы:
             {{element.psychoEventNotes !==null ? element.psychoEventNotes.symptoms : "Симптомы не было отмечены"}}</p>
         </div>
         <div *ngIf="userService.isPsychologist(user)" class="example-element-description">
