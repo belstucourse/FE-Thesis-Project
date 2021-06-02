@@ -14,7 +14,7 @@
         <mat-header-cell *matHeaderCellDef> Начало рабочего дня </mat-header-cell>
         <mat-cell *matCellDef="let element" [satPopoverAnchorFor]="p" (click)="p.open()">
           <ng-container *ngIf="element.startDateTime">
-            {{element.startDateTime}}
+            {{datepipe.transform(element.startDateTime, 'medium')}}
           </ng-container>
           <span class="add-comment" *ngIf="!element.startDateTime">
             Добавить начало рабочего дня
@@ -35,7 +35,7 @@
         <mat-header-cell *matHeaderCellDef> Конец рабочего дня </mat-header-cell>
         <mat-cell *matCellDef="let element" [satPopoverAnchorFor]="p" (click)="p.open()">
           <ng-container *ngIf="element.endDateTime">
-            {{element.endDateTime}}
+            {{datepipe.transform(element.endDateTime, 'medium')}}
           </ng-container>
           <span class="add-comment" *ngIf="!element.endDateTime">
             Добавить конец рабочего дня
@@ -57,10 +57,10 @@
     </mat-table>
 
   </div>
-  <mat-card *ngIf="isActiveProfile">
-    <mat-card-content>
-      <form [formGroup]="workdayForm" (ngSubmit)="addWorkday()" style="display:block;">
-        <mat-form-field appearance="fill" style="width: 100%">
+  <mat-card *ngIf="isActiveProfile" style="display:block;">
+    <mat-card-content style="display:block;">
+      <form [formGroup]="workdayForm" (ngSubmit)="addWorkday()" style="display:block; width: 100%">
+        <mat-form-field appearance="fill" style="width: 350px">
           <mat-label>Дата рабочего дня</mat-label>
           <input matInput [matDatepicker]="picker" formControlName="date">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -70,8 +70,8 @@
           <mat-checkbox class="example-margin" formControlName="generateAllWeek">Сгенерировать на неделю, начиная с отмеченной даты</mat-checkbox>
         </div>
       </form>
-      <input type="time" (click)="openStart()" value="{{selectedStartTime}}">
-      <input type="time" (click)="openEnd()" value="{{selectedEndTime}}">
+      <input type="time" (click)="openStart()" value="{{selectedStartTime}}" style="text-align: center">
+      <input type="time" (click)="openEnd()" value="{{selectedEndTime}}" style="text-align: center">
     </mat-card-content>
 
   </mat-card>

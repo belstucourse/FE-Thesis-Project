@@ -8,6 +8,7 @@ import {UserService} from '../../services/user.service';
 import {MatTable} from '@angular/material/table';
 import {DateTimeCalculator} from '../../services/date-time-calculator.service';
 import {User} from '../../models/user/user';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-psycho-workday',
@@ -29,6 +30,7 @@ export class PsychoWorkdayComponent implements OnInit {
   isActiveProfile: boolean = false;
   @Input()
   public inputUserId: string;
+  public datepipe: DatePipe = new DatePipe('ru');
 
   constructor(private workdayService: WorkdayService,
               private authService: AuthService,

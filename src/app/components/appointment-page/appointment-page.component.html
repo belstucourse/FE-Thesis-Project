@@ -6,13 +6,15 @@
     </div>
 
     <div class="appointment-user">
-      <span class="username">Dr {{psychologist?.firstName}} {{psychologist?.lastName}}</span>
-      <span class="specialization">General practitioner</span>
+      <span class="username"> Доктор {{psychologist?.firstName}} {{psychologist?.lastName}}</span>
+      <span class="specialization">Практики</span>
+      <a *ngFor="let tag of psychologist.tags" href="javascript:void(0);"
+         class="badge badge-light badge-pill" style="font-size: 12px">{{tag.name}}</a>
     </div>
 
     <div class="appointment-location">
-      <p>3337 Goldie Lane</p>
-      <p>84025 Farmington, Utah</p>
+      <p>{{psychologist?.education}}</p>
+      <p>Мобильный телефон: {{psychologist.mobile}}</p>
 
     </div>
   </div>
@@ -32,7 +34,7 @@
         <ul>
           <li *ngFor="let timeslot of timeslots">
             <ul *ngFor="let slot of timeslot.slots">
-              <li (click)="chooseTimeslotEvent($event)" [id]="slot" [class.empty]="slot === null || timeslot === null">{{datepipe.transform(slot, 'shortTime')}}</li>
+              <li (click)="chooseTimeslotEvent($event)" [id]="slot" [class.empty]="slot === null || timeslot === null">{{datepipe.transform(slot, 'HH:mm')}}</li>
             </ul>
           </li>
         </ul>
@@ -41,7 +43,7 @@
 
 
     <div class="calendar-buttons">
-      <button class="validation" type="button" (click)="bookAppointment()">Book an appointment</button>
+      <button class="validation" type="button" (click)="bookAppointment()">Заказать встречу</button>
     </div>
   </div>
 </div>

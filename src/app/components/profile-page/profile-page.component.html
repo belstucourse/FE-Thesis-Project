@@ -49,14 +49,8 @@
               </ul>
             </div>
             <div class="card-footer text-center">
-              <a href="javascript:void(0)" class="btn-social btn-facebook waves-effect waves-light m-1"><i
-                class="fa fa-facebook"></i></a>
-              <a href="javascript:void(0)" class="btn-social btn-google-plus waves-effect waves-light m-1"><i
-                class="fa fa-google-plus"></i></a>
-              <a href="javascript:void(0)" class="list-inline-item btn-social btn-behance waves-effect waves-light"><i
-                class="fa fa-behance"></i></a>
-              <a href="javascript:void(0)" class="list-inline-item btn-social btn-dribbble waves-effect waves-light"><i
-                class="fa fa-dribbble"></i></a>
+
+              <span *ngFor="let tag of psychologist.tags" class="badge badge-dark badge-pill" style="font-size: 10px">{{tag.name}}</span>
             </div>
           </div>
         </div>
@@ -67,7 +61,11 @@
             <ul class="nav nav-pills nav-pills-primary nav-justified">
               <li class="nav-item" *ngIf="isActiveUserProfile">
                 <a href="javascript:void(0);" data-target="#profile" data-toggle="pill" class="nav-link active show"><i
-                  class="icon-user"></i> <span class="hidden-xs">Профиль</span></a>
+                  class="icon-user"></i> <span class="hidden-xs">Предстоящие встречи</span></a>
+              </li>
+              <li class="nav-item" *ngIf="isActiveUserProfile">
+                <a href="javascript:void(0);" data-target="#previous" data-toggle="pill" class="nav-link"><i
+                  class="icon-envelope-open"></i> <span class="hidden-xs">Прошедшие встречи</span></a>
               </li>
               <li class="nav-item" *ngIf="userService.isPsychologist(user)">
                 <a href="javascript:void(0);" data-target="#messages" data-toggle="pill" class="nav-link"><i
@@ -75,16 +73,13 @@
               </li>
               <li class="nav-item" *ngIf="isActiveUserProfile">
                 <a href="javascript:void(0);" data-target="#edit" data-toggle="pill" class="nav-link"><i
-                  class="icon-note"></i> <span class="hidden-xs">Редактирование</span></a>
+                  class="icon-note"></i> <span class="hidden-xs">Редактировать профиль</span></a>
               </li>
             </ul>
 
             <div class="tab-content p-3">
               <div class="tab-pane active show" id="profile">
                 <div class="row">
-                  <div class="col-md-6">
-                    <!--                  <h6>About</h6>-->
-                  </div>
                   <div class="col-md-12">
                     <!--                  <h5 class="mt-2 mb-3"><span class="fa fa-clock-o ion-clock float-right"></span> Recent Activity</h5>-->
                     <app-appointment-dashboard [user]="user" *ngIf="isActiveUserProfile"></app-appointment-dashboard>
@@ -92,10 +87,12 @@
                 </div>
                 <div class="col-md-12" *ngIf="isPsycho">
                   <h6></h6>
-                  <a *ngFor="let tag of psychologist.tags" href="javascript:void(0);"
-                     class="badge badge-dark badge-pill">{{tag.name}}</a>
                 </div>
                 <!--/row-->
+              </div>
+              <div class="tab-pane" id="previous">
+                <app-appointment-previous-dashboard [user]="user" *ngIf="isActiveUserProfile"></app-appointment-previous-dashboard>
+                <!--              <app-psycho-workday></app-psycho-workday>-->
               </div>
               <div class="tab-pane" id="messages">
                 <app-psycho-workday [isActiveProfile]="isActiveUserProfile" [inputUserId]="userId"></app-psycho-workday>

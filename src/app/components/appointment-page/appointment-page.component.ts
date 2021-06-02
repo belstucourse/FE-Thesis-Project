@@ -20,7 +20,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 export class AppointmentPageComponent implements OnInit {
   public psychologist: Psychologist;
   public timeslots: PsychoAvailableTimeslot[];
-  public datepipe: DatePipe = new DatePipe('en-US');
+  public datepipe: DatePipe = new DatePipe('ru');
   public selectedDate: string;
   public timeIds: string[] = [];
   public client: Client;

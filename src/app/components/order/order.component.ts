@@ -42,7 +42,7 @@ export class OrderComponent implements OnInit {
         reasonForVisit: this.orderForm.controls['note'].value
       };
     this.eventService.saveOrder(event).subscribe((event) => {
-        this.snackBar.open('You have been registered on appointment. If doctor approve your order, we send a notification email with link to the video room', 'Done');
+        this.snackBar.open('Вы записались на прием к психолгу. На ваш адрес была выслана информация о встрече и ссылка на видеоконференцию', 'Хорошо');
         this.router.navigate(['/catalog']);
       }
     );
