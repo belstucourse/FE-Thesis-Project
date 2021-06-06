@@ -1,6 +1,6 @@
-<mat-form-field>
-  <mat-label>Фил</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+<mat-form-field style="width: 100%">
+  <mat-label>Фильтровать по дате записи или по имени пациента</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Имя пациента" #input>
 </mat-form-field>
 
 <table mat-table
