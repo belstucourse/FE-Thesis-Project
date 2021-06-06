@@ -1,18 +1,19 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import {User} from '../../models/user/user';
+import {Event as EventModel} from '../../models/workday/event';
+import {DatePipe} from '@angular/common';
 import {EventService} from '../../services/event.service';
 import {UserService} from '../../services/user.service';
-import {Event} from '../../models/workday/event';
 import {AuthService} from '../../services/auth.service';
-import {User} from 'src/app/models/user/user';
-import {DatePipe} from '@angular/common';
 import {AppointmentNotesService} from '../../services/appointment-notes.service';
 import {DetailedEvents} from '../../models/workday/detailed-events';
+import {animate, state, style, transition, trigger} from '@angular/animations';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
-  selector: 'app-appointment-dashboard',
-  templateUrl: './appointment-dashboard.component.html',
-  styleUrls: ['./appointment-dashboard.component.css'],
+  selector: 'app-appointment-previous-dashboard',
+  templateUrl: './appointment-previous-dashboard.component.html',
+  styleUrls: ['./appointment-previous-dashboard.component.css'],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({height: '0px', minHeight: '0'})),
@@ -22,7 +23,8 @@ import {DetailedEvents} from '../../models/workday/detailed-events';
 
   ]
 })
-export class AppointmentDashboardComponent implements OnInit {
+export class AppointmentPreviousDashboardComponent implements OnInit {
+
   columnsToDisplay: string[] = [
     // 'id',
     'date',
@@ -32,9 +34,9 @@ export class AppointmentDashboardComponent implements OnInit {
   ];
   @Input()
   user: User;
-  expandedElement: Event | null;
-  @Input()
-  dataSource: Event[];
+  expandedElement: EventModel | null;
+  dataSource;
+
   public datepipe: DatePipe = new DatePipe('ru');
 
   constructor(private eventService: EventService,
@@ -48,22 +50,28 @@ export class AppointmentDashboardComponent implements OnInit {
       .subscribe(user => {
         if (this.userService.isPsychologist(this.user)) {
           this.eventService.getDetailedEventsOfPsycho(user.id).subscribe((events: DetailedEvents[]) => {
-            this.dataSource = events.filter(event=>event.isEnded===false);
+            this.dataSource = new MatTableDataSource( events.filter(event => event.isEnded === true));
           });
         } else {
           this.eventService.getClientDetailedEvents(user.id).subscribe((events: DetailedEvents[]) => {
-            this.dataSource = events.filter(event=>event.isEnded===false);
+            this.dataSource = new MatTableDataSource(events.filter(event => event.isEnded === true));
           });
         }
       });
   }
 
-  reject(element: Event) {
+  reject(element: EventModel) {
     element.isConfirmed = false;
-    this.eventService.saveOrder(element).subscribe((event: Event) => {
+    this.eventService.saveOrder(element).subscribe((event: EventModel) => {
       for (let item of this.dataSource) {
         item.isConfirmed = item.id === event.id ? event.isConfirmed : item.isConfirmed;
       }
     });
   }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
 }

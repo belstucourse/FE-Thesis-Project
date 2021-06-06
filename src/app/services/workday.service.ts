@@ -26,6 +26,10 @@ export class WorkdayService {
     return this.httpClient.post<PsychoWorkday>('api/timeslot/', psychoTimeslot);
   }
 
+  public saveTimeslotsOnWeek(psychoTimeslot: PsychoWorkday): Observable<PsychoWorkday[]> {
+    return this.httpClient.post<PsychoWorkday[]>('api/timeslot/all', psychoTimeslot);
+  }
+
   public getPsychoWorkdaysOnWeek(psychoId: string): Observable<PsychoWorkday[]> {
     return this.httpClient.get<PsychoWorkday[]>('api/timeslot/'+psychoId+'/workday');
   }

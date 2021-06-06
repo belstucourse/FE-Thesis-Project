@@ -1,6 +1,13 @@
 <h3 style="text-align: center">Статьи наших специалистов</h3>
 <!--<div class="row">-->
 <div>
+  <mat-form-field appearance="fill">
+    <mat-label>Сортировать по</mat-label>
+    <mat-select [(value)]="selected" (selectionChange)="change()">
+      <mat-option value="id">По дате добавления</mat-option>
+      <mat-option value="psychologist_id">По релевантности</mat-option>
+    </mat-select>
+  </mat-form-field>
   <app-blog-card *ngFor="let post of posts" [post]="post"></app-blog-card>
   <mat-paginator
     [length]="length"

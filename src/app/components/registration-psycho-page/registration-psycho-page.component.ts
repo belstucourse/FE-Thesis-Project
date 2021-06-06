@@ -97,7 +97,7 @@ export class RegistrationPsychoPageComponent implements OnInit {
     this.authForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
-      tel: new FormControl('', [Validators.required, Validators.pattern('/^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\\s\\./0-9]*$/g')]),
+      tel: new FormControl('', [Validators.required]),
       middleName: new FormControl('', Validators.required),
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),

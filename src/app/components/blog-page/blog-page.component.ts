@@ -14,10 +14,11 @@ export class BlogPageComponent implements OnInit {
   public length = 1000;
   public pageSize = 20;
   public posts: Post[];
+  selected: string = "id";
 
 
   constructor(private postService: PostService) {
-    this.postService.getAllPosts(0).subscribe((postPage)=>{
+    this.postService.getAllPosts(0, this.selected).subscribe((postPage)=>{
       this.posts = postPage.content;
     })
   }
@@ -26,7 +27,7 @@ export class BlogPageComponent implements OnInit {
 
     this.paginator.page.subscribe(
       (event) => {
-        this.postService.getAllPosts(event.pageIndex).subscribe((postPage)=>{
+        this.postService.getAllPosts(event.pageIndex, this.selected).subscribe((postPage)=>{
           this.posts = postPage.content;
         })
       }
@@ -34,5 +35,11 @@ export class BlogPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  change() {
+    this.postService.getAllPosts(0, this.selected).subscribe((postPage)=>{
+      this.posts = postPage.content;
+    })
   }
 }

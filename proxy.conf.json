@@ -1,9 +1,8 @@
 {
   "/api/*": {
     "target": {
-      "host": "localhost",
-      "protocol": "http:",
-      "port": 8001
+      "host": "bstu-thesis-project.herokuapp.com",
+      "protocol": "https:"
     },
     "secure": false,
     "logLevel": "info"

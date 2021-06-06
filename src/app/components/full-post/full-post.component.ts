@@ -6,6 +6,9 @@ import {UserService} from '../../services/user.service';
 import {ActivatedRoute} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Mark} from '../../models/post/mark';
+import {MarkType} from '../../models/post/mark-type.enum';
+import {PostMarkResponse} from '../../models/post/post-mark-response';
 
 @Component({
   selector: 'app-full-post',
@@ -19,6 +22,10 @@ export class FullPostComponent implements OnInit {
   public currentUserId: string;
   public isEditable: boolean = false;
   public postForm: FormGroup;
+  isAuthenticated: boolean = true;
+  likeCount: number = 0;
+  dislikeCount: number = 0;
+  userChoice: MarkType;
 
   constructor(private postService: PostService,
               private userService: UserService,
@@ -27,8 +34,14 @@ export class FullPostComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.postService.getPostById(params.get('postId')).subscribe(post => {
         this.post = post;
+        this.postService.getAllMarksOfPost(post.id).subscribe((postMarkResponse: PostMarkResponse) => {
+          this.likeCount = postMarkResponse.likeCount;
+          this.dislikeCount = postMarkResponse.dislikeCount;
+          this.userChoice = postMarkResponse.userMarkType;
+        });
         this.userService.getUserById(post.psychologistId).subscribe(user => this.user = user);
         this.currentUserId = authService.getUserIdByToken();
+        this.isAuthenticated = authService.getUserIdByToken() !== '';
       });
     });
     this.postForm = new FormGroup({
@@ -38,6 +51,7 @@ export class FullPostComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
 
 
@@ -54,4 +68,37 @@ export class FullPostComponent implements OnInit {
     });
   }
 
+  setLike() {
+    let mark: Mark = {
+      markType: MarkType.LIKE,
+      postId: this.post.id,
+      userId: this.authService.getUserIdByToken()
+    };
+    if (this.userChoice !== MarkType.LIKE) {
+      this.postService.saveMark(mark).subscribe((mark: Mark) => {
+        if (this.userChoice === MarkType.DISLIKE) {
+          this.dislikeCount--;
+        }
+        this.likeCount++;
+        this.userChoice = MarkType.LIKE;
+      });
+    }
+  }
+
+  setDislike() {
+    let mark: Mark = {
+      markType: MarkType.DISLIKE,
+      postId: this.post.id,
+      userId: this.authService.getUserIdByToken()
+    };
+    if (this.userChoice !== MarkType.DISLIKE) {
+      this.postService.saveMark(mark).subscribe((mark: Mark) => {
+        if (this.userChoice === MarkType.LIKE) {
+          this.likeCount--;
+        }
+        this.dislikeCount++;
+        this.userChoice = MarkType.DISLIKE;
+      });
+    }
+  }
 }

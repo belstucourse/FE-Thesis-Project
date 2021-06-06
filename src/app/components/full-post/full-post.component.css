@@ -1,0 +1,13 @@
+.like_button_count {
+  font-weight: 500;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: auto;
+  font-size: 25px;
+  overflow: hidden;
+  color: var(--steel_gray_540);
+  white-space: nowrap;
+  margin-top: 1%;
+}
+.dislike{
+  float:left;
+}

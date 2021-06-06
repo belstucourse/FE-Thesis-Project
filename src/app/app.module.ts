@@ -1,8 +1,10 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
-import {RouterModule} from '@angular/router';
+import localeRu from '@angular/common/locales/ru';
+import { registerLocaleData } from '@angular/common';
 
+import {RouterModule} from '@angular/router';
 import {AppComponent} from './app.component';
 import {HomePageComponent} from './components/home-page/home-page.component';
 import {CatalogPageComponent} from './components/catalog-page/catalog-page.component';
@@ -94,17 +96,18 @@ import {PsychoGuard} from './guards/psycho.guard';
 import {AppointmentGuardGuard} from './guards/appointment-guard.guard';
 import {ClientRepeatedAppointmentRegistrationComponent} from './components/client-repeated-appointment-registration/client-repeated-appointment-registration.component';
 import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule} from '@angular/material-moment-adapter';
+import { AppointmentPreviousDashboardComponent } from './components/appointment-previous-dashboard/appointment-previous-dashboard.component';
 
 
 const routes = [
   {path: '', component: HomePageComponent, canActivate: [GuestGuard]},
-  {path: 'catalog', component: CatalogPageComponent, canActivate: [ClientGuard]},
+  {path: 'catalog', component: CatalogPageComponent},
   {path: 'signin', component: SignInComponent},
   {path: 'registration-c', component: RegistrationClientPageComponent},
   {path: 'registration-p', component: RegistrationPsychoPageComponent},
   {path: 'appointment/:psychoId', component: AppointmentPageComponent, canActivate: [AppointmentGuardGuard]},
   {path: 'complaint', component: ComplaitPageComponent},
-  {path: 'feedback', component: FeedbackPageComponent, canActivate: [ClientGuard]},
+  {path: 'feedback', component: FeedbackPageComponent},
   {path: 'create-post', component: CreatePostPageComponent, canActivate: [PsychoGuard]},
   {path: 'blog', component: BlogPageComponent},
   {path: 'chat', component: ChatComponent},
@@ -118,6 +121,8 @@ const routes = [
   {path: 'about', component: AboutComponent},
   {path: 'workday', component: PsychoWorkdayComponent}
 ];
+
+registerLocaleData(localeRu, 'ru');
 
 @NgModule({
   declarations: [
@@ -150,7 +155,8 @@ const routes = [
     AdminPsychoCardComponent,
     AboutComponent,
     UserScheduleComponent,
-    ClientRepeatedAppointmentRegistrationComponent
+    ClientRepeatedAppointmentRegistrationComponent,
+    AppointmentPreviousDashboardComponent
   ],
   imports: [
     BidiModule,

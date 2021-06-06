@@ -25,7 +25,7 @@ export class JwtInterceptor implements HttpInterceptor {
       if (err instanceof HttpErrorResponse) {
         if (err.status === 401) {
           this.authService.logout();
-          this.snackBar.open(err.message+'. Your token has expired or not provided. Please, login into account', 'Done')
+          this.snackBar.open(err.message+'.\n Вы ввели неправильный логин или пароль ', 'Хорошо')
           this.router.navigate(['/']);
         }
       }

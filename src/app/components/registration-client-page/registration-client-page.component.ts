@@ -59,6 +59,6 @@ export class RegistrationClientPageComponent implements OnInit {
     this.userService.saveUser(client).subscribe((client: User) => {
       this.fileUploaderService.saveFile(this.files, client.id, FileType.AVATAR).subscribe();
       this.router.navigate(['/']);
-    }, error => this.snackBar.open(error.message, 'Done'));
+    }, error => this.snackBar.open(error.message, 'Хорошо'));
   }
 }

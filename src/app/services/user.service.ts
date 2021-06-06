@@ -6,6 +6,7 @@ import {Client} from '../models/user/client';
 import {Psychologist} from '../models/user/psychologist';
 import {PagePsychologist} from '../models/pagePsychologist';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import {Admin} from "../models/user/admin";
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,10 @@ export class UserService {
     return 'mobile' in object && 'tags' in object;
   }
 
+  public isAdmin(object: User): object is Admin {
+    return 'localDate' in object;
+  }
+
   public getDoctorsByTagNames(tagNames: string[]): Observable<PagePsychologist> {
     let params = new HttpParams();
     tagNames.forEach((name: string) => params = params.append('tagNames', name));
@@ -55,6 +60,7 @@ export class UserService {
   public getAllPsychos(): Observable<Psychologist[]> {
     return this.httpClient.get<Psychologist[]>('api/users/all-psycho');
   }
+
 
   public getDoctorsByTagNamesAndWorkday(tagNames: string[], startDate: Date, endDate: Date): Observable<PagePsychologist> {
     let params = new HttpParams();
