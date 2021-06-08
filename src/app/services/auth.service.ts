@@ -13,6 +13,7 @@ import {environment} from '../../environments/environment.prod';
   providedIn: 'root'
 })
 export class AuthService {
+  //add line to trigger a new build
   private helper = new JwtHelperService();
   baseUrl = environment.baseUrl;
   public currentUser: Subject<User> = new BehaviorSubject(null);
