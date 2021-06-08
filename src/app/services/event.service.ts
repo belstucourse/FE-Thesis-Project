@@ -15,11 +15,11 @@ export class EventService {
   }
 
   public getClientEvents(clientId: string): Observable<Event[]> {
-    return this.httpClient.get<Event[]>(this.baseUrl + 'api/event/' + clientId + '/client');
+    return this.httpClient.get<Event[]>(this.baseUrl + '/api/event/' + clientId + '/client');
   }
 
   public getByRoomId(roomId: string): Observable<Event> {
-    return this.httpClient.get<Event>(this.baseUrl + 'api/event/room/' + roomId);
+    return this.httpClient.get<Event>(this.baseUrl + '/api/event/room/' + roomId);
   }
 
   public saveOrder(event: Event): Observable<Event> {
@@ -31,7 +31,7 @@ export class EventService {
   }
 
   public getClientDetailedEvents(clientId: string): Observable<DetailedEvents[]> {
-    return this.httpClient.get<DetailedEvents[]>(this.baseUrl + 'api/event/' + clientId + '/client/details');
+    return this.httpClient.get<DetailedEvents[]>(this.baseUrl + '/api/event/' + clientId + '/client/details');
   }
 
   public getDetailedEventsOfPsycho(psychoId: string): Observable<DetailedEvents[]> {
