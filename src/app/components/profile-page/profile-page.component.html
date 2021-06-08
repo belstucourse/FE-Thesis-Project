@@ -20,9 +20,9 @@
               <div class="user-box">
                 <img
                   style="max-height: 100%; max-width: 100%;  border-radius: 50% !important;height: 100px !important;  width: 100px !important; overflow: hidden !important; display: flex !important; justify-content: center !important; align-items: center !important;"
-                  src="{{user.avatarUrl!==null ? user.avatarUrl : 'assets/man.png'}}">
+                  src="{{user?.avatarUrl!==null ? user?.avatarUrl : 'assets/man.png'}}">
               </div>
-              <h5 class="mb-1 text-white">{{user.firstName}} {{user.middleName}} {{user.lastName}}</h5>
+              <h5 class="mb-1 text-white">{{user?.firstName}} {{user?.middleName}} {{user?.lastName}}</h5>
               <h6 class="text-light"></h6>
             </div>
             <div class="card-body">
@@ -50,7 +50,7 @@
             </div>
             <div class="card-footer text-center">
 
-              <span *ngFor="let tag of psychologist.tags" class="badge badge-dark badge-pill" style="font-size: 10px">{{tag.name}}</span>
+              <span *ngFor="let tag of psychologist?.tags" class="badge badge-dark badge-pill" style="font-size: 10px">{{tag.name}}</span>
             </div>
           </div>
         </div>
