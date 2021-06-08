@@ -33,7 +33,7 @@ export class AuthService {
 
 
   login(user: UserLogin) {
-    return this.http.post<any>(this.baseUrl + 'api/token', user)
+    return this.http.post<any>(this.baseUrl + '/api/token', user)
       .subscribe(
         (token: AuthToken) => {
           const decodedToken = this.helper.decodeToken(token.token);
@@ -48,7 +48,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     this.router.navigate(['/']);
-    this.http.post(this.baseUrl + 'api/logout', null).subscribe();
+    this.http.post(this.baseUrl + '/api/logout', null).subscribe();
   }
 
   public isAuthenticated(): boolean {

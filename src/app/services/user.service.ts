@@ -20,7 +20,7 @@ export class UserService {
   }
 
   public getUserById(userId: string): Observable<User> {
-    return this.httpClient.get<User>(this.baseUrl +'api/users/' + userId);
+    return this.httpClient.get<User>(this.baseUrl +'/api/users/' + userId);
   }
 
   //type: client, support, psychologist, admin
@@ -51,15 +51,15 @@ export class UserService {
   public getDoctorsByTagNames(tagNames: string[]): Observable<PagePsychologist> {
     let params = new HttpParams();
     tagNames.forEach((name: string) => params = params.append('tagNames', name));
-    return this.httpClient.get<PagePsychologist>(this.baseUrl +'api/users/doctors', {params});
+    return this.httpClient.get<PagePsychologist>(this.baseUrl +'/api/users/doctors', {params});
   }
 
   public getAllUsers(): Observable<User[]> {
-    return this.httpClient.get<User[]>(this.baseUrl +'api/users/all');
+    return this.httpClient.get<User[]>(this.baseUrl +'/api/users/all');
   }
 
   public getAllPsychos(): Observable<Psychologist[]> {
-    return this.httpClient.get<Psychologist[]>(this.baseUrl +'api/users/all-psycho');
+    return this.httpClient.get<Psychologist[]>(this.baseUrl +'/api/users/all-psycho');
   }
 
 
@@ -68,6 +68,6 @@ export class UserService {
     tagNames.forEach((name: string) => params = params.append('tagNames', name));
     params = params.append('startDate', startDate.toISOString());
     params = params.append('endDate', endDate.toISOString());
-    return this.httpClient.get<PagePsychologist>(this.baseUrl +'api/users/doctors/search', {params});
+    return this.httpClient.get<PagePsychologist>(this.baseUrl +'/api/users/doctors/search', {params});
   }
 }
