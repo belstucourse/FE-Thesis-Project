@@ -7,32 +7,33 @@ import {Psychologist} from '../models/user/psychologist';
 import {PagePsychologist} from '../models/pagePsychologist';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {Admin} from "../models/user/admin";
+import {environment} from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   private helper = new JwtHelperService();
-
+  baseUrl = environment.baseUrl;
   constructor(private httpClient: HttpClient,
               private injector: Injector) {
   }
 
   public getUserById(userId: string): Observable<User> {
-    return this.httpClient.get<User>('api/users/' + userId);
+    return this.httpClient.get<User>(this.baseUrl +'api/users/' + userId);
   }
 
   //type: client, support, psychologist, admin
   public saveUser(user: User): Observable<User> {
-    return this.httpClient.post<User>('/api/users', user);
+    return this.httpClient.post<User>(this.baseUrl +'/api/users', user);
   }
 
   public updateUser(user: User): Observable<User> {
-    return this.httpClient.put<User>('/api/users', user);
+    return this.httpClient.put<User>(this.baseUrl +'/api/users', user);
   }
 
   public updatePsycho(psychologist: Psychologist): Observable<User> {
-    return this.httpClient.put<Psychologist>('/api/users/psycho', psychologist);
+    return this.httpClient.put<Psychologist>(this.baseUrl +'/api/users/psycho', psychologist);
   }
 
   public isClient(object: User): object is Client {
@@ -50,15 +51,15 @@ export class UserService {
   public getDoctorsByTagNames(tagNames: string[]): Observable<PagePsychologist> {
     let params = new HttpParams();
     tagNames.forEach((name: string) => params = params.append('tagNames', name));
-    return this.httpClient.get<PagePsychologist>('api/users/doctors', {params});
+    return this.httpClient.get<PagePsychologist>(this.baseUrl +'api/users/doctors', {params});
   }
 
   public getAllUsers(): Observable<User[]> {
-    return this.httpClient.get<User[]>('api/users/all');
+    return this.httpClient.get<User[]>(this.baseUrl +'api/users/all');
   }
 
   public getAllPsychos(): Observable<Psychologist[]> {
-    return this.httpClient.get<Psychologist[]>('api/users/all-psycho');
+    return this.httpClient.get<Psychologist[]>(this.baseUrl +'api/users/all-psycho');
   }
 
 
@@ -67,6 +68,6 @@ export class UserService {
     tagNames.forEach((name: string) => params = params.append('tagNames', name));
     params = params.append('startDate', startDate.toISOString());
     params = params.append('endDate', endDate.toISOString());
-    return this.httpClient.get<PagePsychologist>('api/users/doctors/search', {params});
+    return this.httpClient.get<PagePsychologist>(this.baseUrl +'api/users/doctors/search', {params});
   }
 }
