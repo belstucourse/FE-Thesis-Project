@@ -97,6 +97,7 @@ import {AppointmentGuardGuard} from './guards/appointment-guard.guard';
 import {ClientRepeatedAppointmentRegistrationComponent} from './components/client-repeated-appointment-registration/client-repeated-appointment-registration.component';
 import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule} from '@angular/material-moment-adapter';
 import { AppointmentPreviousDashboardComponent } from './components/appointment-previous-dashboard/appointment-previous-dashboard.component';
+import { CommentComponent } from './components/comment/comment.component';
 
 
 const routes = [
@@ -156,7 +157,8 @@ registerLocaleData(localeRu, 'ru');
     AboutComponent,
     UserScheduleComponent,
     ClientRepeatedAppointmentRegistrationComponent,
-    AppointmentPreviousDashboardComponent
+    AppointmentPreviousDashboardComponent,
+    CommentComponent
   ],
   imports: [
     BidiModule,

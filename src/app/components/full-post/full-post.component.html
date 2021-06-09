@@ -37,12 +37,24 @@
         <mat-form-field appearance="standard" style="width: 100%">
           <mat-label>Статья</mat-label>
           <mat-icon matSuffix>description</mat-icon>
-          <textarea matInput cdkTextareaAutosize placeholder="..." value="{{post.text}}" formControlName="text" required>
+          <textarea matInput cdkTextareaAutosize placeholder="..." value="{{post.text}}" formControlName="text"
+                    required>
           </textarea>
         </mat-form-field>
         <button mat-raised-button color="primary">Изменить</button>
       </form>
     </mat-card-content>
   </mat-card>
+  <div [formGroup]="commentForm" class="panel-body">
+    <div class="panel-heading">
+      Комментарии
+    </div>
+    <textarea formControlName="comment" class="form-control" placeholder="Напишите комментарии..." rows="3"></textarea>
+    <br>
+    <button type="button" class="btn btn-info pull-right" (click)="saveComment()">Post</button>
+    <div class="clearfix"></div>
+    <hr>
+    <app-comment *ngFor="let comment of comments" [comment]="comment"></app-comment>
+  </div>
 </div>
 

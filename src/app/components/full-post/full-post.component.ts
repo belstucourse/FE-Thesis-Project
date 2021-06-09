@@ -9,6 +9,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Mark} from '../../models/post/mark';
 import {MarkType} from '../../models/post/mark-type.enum';
 import {PostMarkResponse} from '../../models/post/post-mark-response';
+import {Comment} from '../../models/post/comment';
+import {CommentService} from '../../services/comment.service';
 
 @Component({
   selector: 'app-full-post',
@@ -26,14 +28,20 @@ export class FullPostComponent implements OnInit {
   likeCount: number = 0;
   dislikeCount: number = 0;
   userChoice: MarkType;
+  commentForm: FormGroup;
+  comments: Comment[];
 
   constructor(private postService: PostService,
               private userService: UserService,
               private activatedRoute: ActivatedRoute,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private commentService: CommentService) {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.postService.getPostById(params.get('postId')).subscribe(post => {
         this.post = post;
+        commentService.get(post.id).subscribe((comments: Comment[]) => {
+          this.comments = comments;
+        });
         this.postService.getAllMarksOfPost(post.id).subscribe((postMarkResponse: PostMarkResponse) => {
           this.likeCount = postMarkResponse.likeCount;
           this.dislikeCount = postMarkResponse.dislikeCount;
@@ -45,8 +53,11 @@ export class FullPostComponent implements OnInit {
       });
     });
     this.postForm = new FormGroup({
-      title: new FormControl('', [Validators.required, Validators.email]),
+      title: new FormControl('', [Validators.required]),
       text: new FormControl('', Validators.required)
+    });
+    this.commentForm = new FormGroup({
+      comment: new FormControl('', [Validators.required])
     });
   }
 
@@ -100,5 +111,16 @@ export class FullPostComponent implements OnInit {
         this.userChoice = MarkType.DISLIKE;
       });
     }
+  }
+
+  saveComment() {
+    let comment: Comment = {
+      postId: this.post.id,
+      senderId: this.authService.getUserIdByToken(),
+      text: this.commentForm.controls['comment'].value
+    };
+    this.commentService.saveComment(comment).subscribe(comment => {
+      this.comments.push(comment);
+    });
   }
 }
