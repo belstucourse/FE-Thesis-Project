@@ -106,6 +106,5 @@ export class AppointmentPageComponent implements OnInit {
       );
     }
 
-    // this.workdayService.bookAppointment(this.selectedDate, this.activeUser.id, );
   }
 }

@@ -1,0 +1,11 @@
+<div class="h-100">
+  <nb-chat *ngIf="friendProfile" [title]="friendProfile.name" status="basic" scrollBottom="true" style="height: 90vh;">
+    <nb-chat-message *ngFor="let msg of messages" [type]="'text'" [message]="msg.text"
+                     [sender]="msg.senderId" [date]="msg.creationDate">
+    </nb-chat-message>
+<!--    [avatar]="msg.avatar"?\-->
+
+    <nb-chat-form [dropFiles]="true" (send)="sendMessage($event)">
+    </nb-chat-form>
+  </nb-chat>
+</div>

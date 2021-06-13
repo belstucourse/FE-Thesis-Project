@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import localeRu from '@angular/common/locales/ru';
-import { registerLocaleData } from '@angular/common';
+import {CommonModule, registerLocaleData} from '@angular/common';
 
 import {RouterModule} from '@angular/router';
 import {AppComponent} from './app.component';
@@ -65,10 +65,6 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {NgxMatFileInputModule} from '@angular-material-components/file-input';
-import {ChatComponent} from './components/chat/chat.component';
-import {ChatHeaderComponent} from './components/chat/chat-header/chat-header.component';
-import {ChatControlsComponent} from './components/chat/chat-controls/chat-controls.component';
-import {ChatMessageComponent} from './components/chat/chat-message/chat-message.component';
 import {FlexModule} from '@angular/flex-layout';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {OrderComponent} from './components/order/order.component';
@@ -98,6 +94,19 @@ import {ClientRepeatedAppointmentRegistrationComponent} from './components/clien
 import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule} from '@angular/material-moment-adapter';
 import { AppointmentPreviousDashboardComponent } from './components/appointment-previous-dashboard/appointment-previous-dashboard.component';
 import { CommentComponent } from './components/comment/comment.component';
+import {
+  NbAlertModule, NbButtonModule,
+  NbCardModule, NbChatModule,
+  NbCheckboxModule, NbContextMenuModule, NbDialogModule,
+  NbFormFieldModule, NbIconModule,
+  NbInputModule,
+  NbLayoutModule, NbListModule,
+  NbProgressBarModule, NbSidebarModule, NbSpinnerModule, NbStatusService, NbUserModule
+} from '@nebular/theme';
+import {ChatComponent} from './chat/chat/chat.component';
+import {ChatBannerComponent} from './chat/chat-banner/chat-banner.component';
+import {ChatDetailComponent} from './chat/chat-detail/chat-detail.component';
+import {ChatListComponent} from './chat/chat-list/chat-list.component';
 
 
 const routes = [
@@ -111,7 +120,6 @@ const routes = [
   {path: 'feedback', component: FeedbackPageComponent},
   {path: 'create-post', component: CreatePostPageComponent, canActivate: [PsychoGuard]},
   {path: 'blog', component: BlogPageComponent},
-  {path: 'chat', component: ChatComponent},
   {path: 'order', component: OrderComponent, canActivate: [ClientGuard]},
   {path: 'profile/:userId', component: ProfilePageComponent}, //TODO: provide  /:psychoId
   {path: 'app-feedback', component: AppFeedbackPageComponent, canActivate: [ClientGuard]},
@@ -120,7 +128,9 @@ const routes = [
   {path: 'admin', component: AdminUserDashboardComponent, canActivate: [AdminGuard]},
   {path: 'admin-p', component: AdminPsychoDashboardComponent, canActivate: [AdminGuard]},
   {path: 'about', component: AboutComponent},
-  {path: 'workday', component: PsychoWorkdayComponent}
+  {path: 'workday', component: PsychoWorkdayComponent},
+  {path: 'chat', component: ChatBannerComponent},
+  {path: 'chat/:id', component: ChatDetailComponent}
 ];
 
 registerLocaleData(localeRu, 'ru');
@@ -140,10 +150,6 @@ registerLocaleData(localeRu, 'ru');
     CreatePostPageComponent,
     BlogPageComponent,
     BlogCardComponent,
-    ChatComponent,
-    ChatHeaderComponent,
-    ChatControlsComponent,
-    ChatMessageComponent,
     OrderComponent,
     ProfilePageComponent,
     AppFeedbackPageComponent,
@@ -158,7 +164,11 @@ registerLocaleData(localeRu, 'ru');
     UserScheduleComponent,
     ClientRepeatedAppointmentRegistrationComponent,
     AppointmentPreviousDashboardComponent,
-    CommentComponent
+    CommentComponent,
+    ChatComponent,
+    ChatBannerComponent,
+    ChatDetailComponent,
+    ChatListComponent
   ],
   imports: [
     BidiModule,
@@ -216,7 +226,13 @@ registerLocaleData(localeRu, 'ru');
     NgxMatFileInputModule,
     FlexModule,
     HttpClientModule,
-    AmazingTimePickerModule
+    AmazingTimePickerModule,
+    CommonModule,
+    RouterModule,
+    NbCardModule,
+    NbLayoutModule, NbCardModule, NbAlertModule, NbInputModule, NbFormFieldModule, NbCheckboxModule, NbProgressBarModule,
+    NbButtonModule, NbIconModule, NbSpinnerModule, NbUserModule, NbSidebarModule, NbChatModule, NbListModule, NbContextMenuModule,
+    NbDialogModule
   ],
   providers: [
     {
@@ -233,7 +249,8 @@ registerLocaleData(localeRu, 'ru');
     ClientGuard,
     GuestGuard,
     PsychoGuard,
-    {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}}
+    {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}},
+    NbStatusService
   ],
   bootstrap: [AppComponent],
   exports: [
