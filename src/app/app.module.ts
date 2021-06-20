@@ -98,6 +98,8 @@ import {ClientRepeatedAppointmentRegistrationComponent} from './components/clien
 import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule} from '@angular/material-moment-adapter';
 import { AppointmentPreviousDashboardComponent } from './components/appointment-previous-dashboard/appointment-previous-dashboard.component';
 import { CommentComponent } from './components/comment/comment.component';
+import { ApplicationStatisticDashboardComponent } from './components/application-statistic-dashboard/application-statistic-dashboard.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 
 const routes = [
@@ -120,7 +122,8 @@ const routes = [
   {path: 'admin', component: AdminUserDashboardComponent, canActivate: [AdminGuard]},
   {path: 'admin-p', component: AdminPsychoDashboardComponent, canActivate: [AdminGuard]},
   {path: 'about', component: AboutComponent},
-  {path: 'workday', component: PsychoWorkdayComponent}
+  {path: 'workday', component: PsychoWorkdayComponent},
+  {path: 'statistics', component: ApplicationStatisticDashboardComponent},
 ];
 
 registerLocaleData(localeRu, 'ru');
@@ -158,7 +161,8 @@ registerLocaleData(localeRu, 'ru');
     UserScheduleComponent,
     ClientRepeatedAppointmentRegistrationComponent,
     AppointmentPreviousDashboardComponent,
-    CommentComponent
+    CommentComponent,
+    ApplicationStatisticDashboardComponent
   ],
   imports: [
     BidiModule,
@@ -216,7 +220,8 @@ registerLocaleData(localeRu, 'ru');
     NgxMatFileInputModule,
     FlexModule,
     HttpClientModule,
-    AmazingTimePickerModule
+    AmazingTimePickerModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [
     {

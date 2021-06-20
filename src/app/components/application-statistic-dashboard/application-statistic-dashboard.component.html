@@ -1,0 +1,195 @@
+<mdb-card class="mb-4 wow fadeIn">
+
+  <!--Card content-->
+  <mdb-card-body class="d-sm-flex justify-content-between">
+
+    <h4 class="mb-sm-0 pt-3">
+      <span>/</span>
+      <span>Статистика приложения за неделю</span>
+    </h4>
+
+  </mdb-card-body>
+  <section class="mt-lg-5">
+
+    <!--Grid row-->
+    <div class="row">
+
+
+      <!--Grid column-->
+      <div class="col-xl-4 col-md-6 mb-r">
+
+        <!--Card-->
+        <mdb-card cascade="true" class="cascading-admin-card">
+
+          <!--Card Data-->
+          <div class="admin-up">
+            <mdb-icon fas icon="chart-line" class="warning-color"></mdb-icon>
+            <div class="data">
+              <p>Количество проведенных встреч</p>
+              <h4><strong>{{countOfEvents}}</strong></h4>
+            </div>
+          </div>
+          <!--/.Card Data-->
+
+          <!--Card content-->
+          <mdb-card-body>
+            <!--Text-->
+            <p class="card-text">Изменение по сравнению с прошлой неделей({{isNaNStat(eventChangePercentage) ? 0 : eventChangePercentage.toString()}}%)</p>
+          </mdb-card-body>
+          <!--/.Card content-->
+
+        </mdb-card>
+        <!--/.Card-->
+
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-xl-4 col-md-6 mb-r">
+
+        <!--Card-->
+        <mdb-card cascade="true" class="cascading-admin-card">
+
+          <!--Card Data-->
+          <div class="admin-up">
+            <mdb-icon fas icon="chart-pie" class="light-blue lighten-1"></mdb-icon>
+            <div class="data">
+              <p>Пользователей на платформе</p>
+              <h4><strong>{{countOfUsers}}</strong></h4>
+            </div>
+          </div>
+          <!--/.Card Data-->
+
+          <!--Card content-->
+          <mdb-card-body>
+            <!--Text-->
+            <p class="card-text">Изменение по сравнению с прошлой неделей({{isNaNStat(userChangePercentage) ? 0 : userChangePercentage.toString()}}%)</p>
+          </mdb-card-body>
+          <!--/.Card content-->
+
+        </mdb-card>
+        <!--/.Card-->
+
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-xl-4 col-md-6 mb-r">
+
+        <!--Card-->
+        <mdb-card cascade="true" class="cascading-admin-card">
+
+          <!--Card Data-->
+          <div class="admin-up">
+            <mdb-icon fas icon="chart-bar" class="red accent-2"></mdb-icon>
+            <div class="data">
+              <p>Количество постов на платформе</p>
+              <h4><strong>{{countOfPosts}}</strong></h4>
+            </div>
+          </div>
+          <!--/.Card Data-->
+
+          <!--Card content-->
+          <mdb-card-body>
+            <!--Text-->
+            <p class="card-text">Изменение по сравнению с прошлой
+              неделей({{isNaNStat(postChangePercentage) ? 0 : postChangePercentage.toString()}}%)</p>
+          </mdb-card-body>
+          <!--/.Card content-->
+
+        </mdb-card>
+        <!--/.Card-->
+
+      </div>
+      <!--Grid column-->
+
+    </div>
+    <!--Grid row-->
+
+  </section>
+
+
+  <!--Grid row-->
+  <div class="row wow fadeIn mt-5">
+
+    <!--Grid column-->
+    <div class="col-md-9 mb-4">
+
+      <!--Card-->
+      <mdb-card>
+
+        <!--Card content-->
+        <mdb-card-body>
+
+          <div style="display: block">
+            <canvas mdbChart [chartType]="chart1Type" [datasets]="chartDatasets" [labels]="chartLabels"
+                    [colors]="chartColors" [options]="chartOptions"
+                    [legend]="true">
+            </canvas>
+          </div>
+        </mdb-card-body>
+
+      </mdb-card>
+      <!--/.Card-->
+
+    </div>
+    <!--Grid column-->
+
+    <!--Grid column-->
+    <div class="col-md-3 mb-4">
+
+      <!--Card-->
+      <mdb-card class="mb-4">
+
+        <!-- Card header -->
+        <div class="card-header text-center">
+          Pie chart
+        </div>
+
+        <!--Card content-->
+        <mdb-card-body>
+
+          <div style="display: block">
+            <canvas mdbChart [chartType]="chart2Type" [datasets]="chartDatasets" [labels]="chartLabels"
+                    [colors]="chartColors" [options]="chartOptions"
+                    [legend]="true">
+            </canvas>
+          </div>
+        </mdb-card-body>
+
+      </mdb-card>
+      <!--/.Card-->
+
+      <!--Card-->
+      <mdb-card class="mb-4">
+        <!--Card content-->
+        <mdb-card-body>
+
+          <!-- List group links -->
+          <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action waves-effect">Встречи
+              <mdb-badge success="true" pill="true" class="pull-right">22%
+                <mdb-icon fas icon="arrow-up" class="ml-1"></mdb-icon>
+              </mdb-badge>
+            </a>
+            <a class="list-group-item list-group-item-action waves-effect">Постов
+              <mdb-badge danger="true" pill="true" class="pull-right">5%
+                <mdb-icon fas icon="arrow-down" class="ml-1"></mdb-icon>
+              </mdb-badge>
+            </a>
+            <a class="list-group-item list-group-item-action waves-effect">Пользователей
+              <mdb-badge primary="true" pill="true" class="pull-right">14</mdb-badge>
+            </a>
+          </div>
+          <!-- List group links -->
+
+        </mdb-card-body>
+
+      </mdb-card>
+      <!--/.Card-->
+
+    </div>
+    <!--Grid column-->
+
+  </div>
+</mdb-card>
