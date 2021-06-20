@@ -23,6 +23,7 @@ import {DetailedEvents} from '../../models/workday/detailed-events';
   ]
 })
 export class AppointmentDashboardComponent implements OnInit {
+  public currentDate: Date = new Date();
   columnsToDisplay: string[] = [
     // 'id',
     'date',
@@ -41,6 +42,9 @@ export class AppointmentDashboardComponent implements OnInit {
               protected userService: UserService,
               private authService: AuthService,
               private appointmentNotesService: AppointmentNotesService) {
+    let date = new Date();
+    date.setMinutes(date.getMinutes() + 10);
+    this.currentDate = date;
   }
 
   ngOnInit(): void {
@@ -48,11 +52,11 @@ export class AppointmentDashboardComponent implements OnInit {
       .subscribe(user => {
         if (this.userService.isPsychologist(this.user)) {
           this.eventService.getDetailedEventsOfPsycho(user.id).subscribe((events: DetailedEvents[]) => {
-            this.dataSource = events.filter(event=>event.isEnded===false);
+            this.dataSource = events.filter(event => event.isEnded === false);
           });
         } else {
           this.eventService.getClientDetailedEvents(user.id).subscribe((events: DetailedEvents[]) => {
-            this.dataSource = events.filter(event=>event.isEnded===false);
+            this.dataSource = events.filter(event => event.isEnded === false);
           });
         }
       });
@@ -65,5 +69,12 @@ export class AppointmentDashboardComponent implements OnInit {
         item.isConfirmed = item.id === event.id ? event.isConfirmed : item.isConfirmed;
       }
     });
+  }
+
+  isDateGreaterOrEqual(appointmentDate: Date) {
+    appointmentDate = new Date(appointmentDate);
+    let currentTime = new Date();
+    currentTime.setMinutes(currentTime.getMinutes() - 10);
+    return appointmentDate >= currentTime;
   }
 }
