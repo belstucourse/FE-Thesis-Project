@@ -33,7 +33,10 @@
       <mat-icon>payments</mat-icon>
       Психологи
     </button>
-
+    <button mat-button routerLink="/admin" *ngIf="isAuthenticated && isAdmin">
+      <mat-icon>insights</mat-icon>
+      Статистика
+    </button>
     <button mat-button routerLink="/signin" *ngIf="!isAuthenticated">
       <mat-icon>how_to_reg</mat-icon>
       Вход
