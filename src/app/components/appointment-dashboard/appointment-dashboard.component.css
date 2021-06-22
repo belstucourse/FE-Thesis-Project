@@ -48,3 +48,10 @@ td.mat-cell {
   border: none;
 }
 
+.isDisabled {
+  color: currentColor;
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.5;
+  text-decoration: none;
+}

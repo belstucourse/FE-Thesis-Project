@@ -40,9 +40,13 @@
             {{element.psychoEventNotes !==null ? element.psychoEventNotes.specialNotes : "Заметок не было оставлено"}}</p>
         </div>
       </div>
-      <div class="example-element-description" *ngIf="element.isConfirmed && !element.isEnded">
-        <a *ngIf="element.isConfirmed && !element.isEnded" href="https://bstu-thesis-project.herokuapp.com/?roomId={{element.roomId}}">Сслыка
+      <div class="example-element-description" *ngIf="element.isConfirmed && !element.isEnded && !isDateGreaterOrEqual(element.date)">
+        <a *ngIf="element.isConfirmed && !element.isEnded" href="https://bstu-thesis-project.herokuapp.com/?roomId={{element.roomId}}">Ссылка
           на видеоконференцию</a>
+      </div>
+
+      <div  *ngIf="element.isConfirmed && !element.isEnded && isDateGreaterOrEqual(element.date)">
+        <a [ngClass]="{'isDisabled': currentDate>=element.date}" *ngIf="element.isConfirmed && !element.isEnded" class="btn btn-primary btn disabled" href="https://bstu-thesis-project.herokuapp.com/?roomId={{element.roomId}}">Ссылка активируется за 10 минут до встречи</a>
       </div>
     </td>
   </ng-container>
